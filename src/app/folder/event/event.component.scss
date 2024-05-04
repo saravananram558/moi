@@ -1,5 +1,5 @@
 .event-wrap{
-    height: 100vh;
+    height: 92vh;
     .content-wrap{
         display: flex;
         justify-content: center;
@@ -24,6 +24,7 @@
             }
         }
         .members-list{
+            padding: 0 2px;
             display: flex;
             flex-direction: column;
             gap: 10px;

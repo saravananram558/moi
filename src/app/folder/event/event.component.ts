@@ -13,7 +13,6 @@ import { OverlayEventDetail } from '@ionic/core/components';
 export class EventComponent  implements OnInit {
  // events:any
  @ViewChild(IonModal) modal!: IonModal;
- message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
  place!: string;
  name!: string;
  surName!: string;
@@ -21,6 +20,10 @@ export class EventComponent  implements OnInit {
  mobileNumber!: number;
  eventId!:number;
  members!:any;
+ message: string = '';
+ mobileNum:string = '';
+ successMessage: string = '';
+ errorMessage: string = '';
 
  constructor(
    private apiService:ServiceService,
@@ -89,6 +92,18 @@ onWillDismiss(event: Event) {
   if (ev.detail.role === 'confirm') {
     // this.message = `Hello, ${ev.detail.data}!`;
   }
+}
+
+sendMessage(): void {
+  this.apiService.sendMessage(this.mobileNum, this.message).subscribe({
+    next: (res: any) => {
+      this.successMessage = 'Message sent successfully!';
+      this.errorMessage = '';
+    },
+    error: (err: HttpErrorResponse) => {
+    },
+  })
+  
 }
 
 }
