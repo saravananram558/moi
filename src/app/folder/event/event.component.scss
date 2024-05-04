@@ -9,6 +9,7 @@
             display: flex;
             justify-content: flex-end;
             align-items: center;
+            margin-bottom: 8px;
             .member-btn{
                 display: flex;
                 justify-content: center;
@@ -16,8 +17,8 @@
                 gap: 5px;
                 border-radius: 10px;
                 height: 38px;
-                background-color: F5DD61;
-                color: rgb(17, 137, 243);
+                background-color: #102C57;
+                color: #fff;
                 font-weight: 700;
                 padding: 8px 12px;
                 margin:5px;
@@ -47,7 +48,8 @@ ion-card-header{
 }
 ion-card-content{
     font-size: 16px;
-    color: #000;
+    color: #000000;
+    font-weight: 700;
 }
 
 ion-content{
