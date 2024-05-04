@@ -1,7 +1,7 @@
 <div class="home-wrapper ion-padding">
   <ion-content class="content-wrap">
     <div class="event-btn-wrap">
-      <button class="event-btn" id="open-modal"><i class="pi pi-plus"></i> Add Event</button>
+      <button class="event-btn" id="open-event-modal"><i class="pi pi-plus"></i> Add Event</button>
     </div>
     <div class="events-list">
       <ion-card *ngFor="let event of events" (click)="navigateToEvent(event.id)">
@@ -17,7 +17,7 @@
   </ion-content>
 </div>
 
-<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+<ion-modal trigger="open-event-modal" (willDismiss)="onWillDismiss($event)">
   <ng-template>
     <ion-header>
       <ion-toolbar>
