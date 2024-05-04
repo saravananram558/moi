@@ -1,0 +1,7 @@
+{
+  "name": "moi-mobile-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
