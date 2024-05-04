@@ -1,10 +1,10 @@
 <div class="home-wrapper ion-padding">
   <ion-content class="content-wrap">
     <div class="event-btn-wrap">
-      <button class="event-btn" (click)="navigateToAddEvent()"><i class="pi pi-plus"></i> Add Event</button>
+      <button class="event-btn"><i class="pi pi-plus"></i> Add Event</button>
     </div>
     <div class="events-list">
-      <ion-card *ngFor="let event of events" onclick="routeToEventPage()">
+      <ion-card *ngFor="let event of events" (click)="navigateToAddEvent(event.id)">
         <ion-card-header>
           <ion-card-title>{{ event.name }}</ion-card-title>
           <ion-card-subtitle><i class="pi pi-map-marker"></i> {{ event.place }}</ion-card-subtitle>

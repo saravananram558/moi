@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent  implements OnInit {
   // events:any
-  eventComponent = EventComponent;
   events: any[] = [
     { name: 'Marriage', place: 'Mannuzhi', totalAmount: 80000 },
     { name: 'Ear Piercing', place: 'Periyanagalur Ayyanar Kovil', totalAmount: 150000 },
@@ -26,13 +25,13 @@ export class HomeComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apiService.getAllEvents().subscribe({
-      next: (res: any) => {
-        this.events = res.data
-      },
-      error: (err: HttpErrorResponse) => {
-      },
-    });
+    // this.apiService.getAllEvents().subscribe({
+    //   next: (res: any) => {
+    //     this.events = res.data
+    //   },
+    //   error: (err: HttpErrorResponse) => {
+    //   },
+    // });
   }
 
   addEvent(){
@@ -48,9 +47,7 @@ export class HomeComponent  implements OnInit {
     })
   }
 
-  navigateToAddEvent() {
+  navigateToAddEvent(e:number) {
     this.router.navigate(['/folder/event']);
-  }
-  
-  
+  }  
 }
