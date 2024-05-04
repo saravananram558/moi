@@ -3,19 +3,20 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-title>{{ folder | titlecase}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content [fullscreen]="true" class="content-page">
   <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ng-container *ngIf="folder === 'home'">
+      <app-home></app-home>
+    </ng-container>
+    <ng-container *ngIf="folder === 'dashboard'">
+      <app-dashboard></app-dashboard>
+    </ng-container>
+    <ng-container *ngIf="folder === 'masters'">
+      <app-masters></app-masters>
+    </ng-container>
   </div>
 </ion-content>
