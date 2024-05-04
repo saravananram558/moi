@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ServiceService } from 'src/app/service/service.service';
 
 @Component({
   selector: 'app-home',
@@ -6,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent  implements OnInit {
+  events:any;
 
-  constructor() { }
+  constructor(
+    private apiService:ServiceService
+  ) { }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.apiService.getAllEvents().subscribe({
+      next: (res: any) => {
+        this.events = res.data
+      },
+      error: (err: HttpErrorResponse) => {
+      },
+    });
+  }
+  
+  
 }

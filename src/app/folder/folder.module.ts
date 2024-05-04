@@ -16,7 +16,7 @@ import { MastersComponent } from './masters/masters.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    FolderPageRoutingModule
+    FolderPageRoutingModule,
   ],
   declarations: [FolderPage, DashboardComponent, HomeComponent, MastersComponent]
 })

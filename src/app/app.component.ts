@@ -9,8 +9,7 @@ export class AppComponent {
     { title: 'Home', url: '/folder/home', icon: 'home' },
     { title: 'Dashboard', url: '/folder/dashboard', icon: 'stats-chart' },
     { title: 'Masters', url: '/folder/masters', icon: 'shield' },
-    // { title: '', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' }
+    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
   ];
   constructor() {}
 }
