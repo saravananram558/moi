@@ -51,10 +51,14 @@ export class EventComponent  implements OnInit {
 
  cancel() {
   this.modal.dismiss(null, 'cancel');
+  this.place = '';
+  this.name = '';
+  this.surName = '';
+  this.amount = 0;
+  this.mobileNumber = 0;
 }
 
 confirm() {
-  this.modal.dismiss(this.name, 'confirm');
   let payload = {
     eventId:this.eventId,
     memberPlace: this.place,
@@ -66,6 +70,12 @@ confirm() {
   this.apiService.addMember(payload).subscribe({
     next: (res: any) => {
       if(res){
+        this.place = '';
+        this.name = '';
+        this.surName = '';
+        this.amount = 0;
+        this.mobileNumber = 0;
+        this.modal.dismiss(payload, 'confirm');
         this.getMembers(this.eventId);
       }
     },

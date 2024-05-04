@@ -44,6 +44,9 @@ export class HomeComponent  implements OnInit {
 
   cancel() {
     this.modal.dismiss(null, 'cancel');
+    this.eventName = ''; 
+    this.eventPlace = ''; 
+    this.amountCollector = ''; 
   }
   
   confirm() {
@@ -57,6 +60,9 @@ export class HomeComponent  implements OnInit {
       next: (res: any) => {
         if(res){
           this.getEvents();
+          this.eventName = ''; 
+          this.eventPlace = ''; 
+          this.amountCollector = ''; 
         }
       },
       error: (err: HttpErrorResponse) => {
