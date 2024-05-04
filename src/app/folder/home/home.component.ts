@@ -18,13 +18,6 @@ export class HomeComponent  implements OnInit {
   eventPlace!: string;
   eventName!: string;
   amountCollector!: string;
-  // events: any[] = [
-  //   { name: 'Marriage', place: 'Mannuzhi', totalAmount: 80000 },
-  //   { name: 'Ear Piercing', place: 'Periyanagalur Ayyanar Kovil', totalAmount: 150000 },
-  //   { name: 'Keda vettu', place: 'Kodukur Ayyanar Kovil', totalAmount: 90000 },
-  //   { name: 'Sigaram yellow water', place: 'Thiruvannamalai', totalAmount: 75000 },
-  //   { name: 'Thatha Death', place: 'Mannuzhi', totalAmount: 80500 },
-  // ];
 
   constructor(
     private apiService:ServiceService,
@@ -45,8 +38,8 @@ export class HomeComponent  implements OnInit {
     });
   }
 
-  navigateToEvent(e:number) {
-    this.router.navigate(['/folder/event']);
+  navigateToEvent(id:number) {
+    this.router.navigate(['/folder/event'], { queryParams: { id: id } });
   }  
 
   cancel() {

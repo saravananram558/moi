@@ -16,4 +16,12 @@ export class ServiceService {
   addEvent(data:any){
     return this.http.post(`${environment.url}/events-management/addEvent`,data)
   }
+
+  getAllMembers(id:number){
+    return this.http.get(`${environment.url}/events-management/getEventMembers/${id}`); 
+  }
+
+  addMember(data:any){
+    return this.http.post(`${environment.url}/events-management/addMember`,data)
+  }
 }

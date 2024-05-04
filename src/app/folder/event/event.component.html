@@ -7,8 +7,8 @@
     <div class="members-list">
       <ion-card *ngFor="let member of members">
         <ion-card-header>
-          <ion-card-title>{{ member.name }}</ion-card-title>
-          <ion-card-subtitle><i class="pi pi-map-marker"></i> {{ member.place }}</ion-card-subtitle>
+          <ion-card-title>{{ member.memberName }}</ion-card-title>
+          <ion-card-subtitle><i class="pi pi-map-marker"></i> {{ member.memberPlace }}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
           {{ member.amount | currency:'INR':'symbol':'1.2-2' }}

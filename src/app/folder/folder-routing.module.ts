@@ -10,7 +10,7 @@ const routes: Routes = [
     component: FolderPage,
     children: [
       {
-        path: 'event',
+        path: 'event/:id',
         component: EventComponent // Define the route for the EventComponent
       }
     ]
