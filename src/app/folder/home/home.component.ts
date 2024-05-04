@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ServiceService } from 'src/app/service/service.service';
-import { EventComponent } from '../event/event.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ServiceService } from 'src/app/service/service.service';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,12 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent  implements OnInit {
   // events:any
+  @ViewChild(IonModal) modal!: IonModal;
+
+  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+  eventPlace!: string;
+  eventName!: string;
+  amountCollector!: string;
   events: any[] = [
     { name: 'Marriage', place: 'Mannuzhi', totalAmount: 80000 },
     { name: 'Ear Piercing', place: 'Periyanagalur Ayyanar Kovil', totalAmount: 150000 },
@@ -34,10 +41,22 @@ export class HomeComponent  implements OnInit {
     // });
   }
 
-  addEvent(){
-    let payload = {
 
-    }
+  navigateToEvent(e:number) {
+    this.router.navigate(['/folder/event']);
+  }  
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+  
+  confirm() {
+    this.modal.dismiss(this.eventName, 'confirm');
+    let payload = {
+      eventName: this.eventName,
+      eventPlace: this.eventPlace,
+      amountCollector: this.amountCollector
+    };
     this.apiService.addEvent(payload).subscribe({
       next: (res: any) => {
         this.events = res.data
@@ -46,8 +65,11 @@ export class HomeComponent  implements OnInit {
       },
     })
   }
-
-  navigateToAddEvent(e:number) {
-    this.router.navigate(['/folder/event']);
-  }  
+  
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+      // this.message = `Hello, ${ev.detail.data}!`;
+    }
+  }
 }

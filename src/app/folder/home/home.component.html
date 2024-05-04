@@ -1,10 +1,10 @@
 <div class="home-wrapper ion-padding">
   <ion-content class="content-wrap">
     <div class="event-btn-wrap">
-      <button class="event-btn"><i class="pi pi-plus"></i> Add Event</button>
+      <button class="event-btn" id="open-modal"><i class="pi pi-plus"></i> Add Event</button>
     </div>
     <div class="events-list">
-      <ion-card *ngFor="let event of events" (click)="navigateToAddEvent(event.id)">
+      <ion-card *ngFor="let event of events" (click)="navigateToEvent(event.id)">
         <ion-card-header>
           <ion-card-title>{{ event.name }}</ion-card-title>
           <ion-card-subtitle><i class="pi pi-map-marker"></i> {{ event.place }}</ion-card-subtitle>
@@ -16,3 +16,30 @@
     </div>
   </ion-content>
 </div>
+
+<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title>Add Event</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-item>
+        <ion-input label="Enter Event Place" labelPlacement="stacked" type="text" placeholder="Place" [(ngModel)]="eventPlace"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Enter Event Name" labelPlacement="stacked" type="text" placeholder="Event" [(ngModel)]="eventName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input label="Enter Amount Collector Name" labelPlacement="stacked" type="text" placeholder="Amount Collector Name" [(ngModel)]="amountCollector"></ion-input>
+      </ion-item>
+    </ion-content>
+  </ng-template>
+</ion-modal>
