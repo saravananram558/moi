@@ -2,14 +2,6 @@ ion-menu-button {
   color: var(--ion-color-primary);
 }
 
-#container {
-  text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 90vh;
-}
-
 #container strong {
   font-size: 20px;
   line-height: 26px;
@@ -26,6 +18,6 @@ ion-menu-button {
   text-decoration: none;
 }
 
-.content-page{
-  padding-top: 7%;
-}
+// .content-page{
+//   padding-top: 7%;
+// }

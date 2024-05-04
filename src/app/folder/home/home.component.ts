@@ -11,20 +11,20 @@ import { OverlayEventDetail } from '@ionic/core/components';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent  implements OnInit {
-  // events:any
+  events:any
   @ViewChild(IonModal) modal!: IonModal;
 
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   eventPlace!: string;
   eventName!: string;
   amountCollector!: string;
-  events: any[] = [
-    { name: 'Marriage', place: 'Mannuzhi', totalAmount: 80000 },
-    { name: 'Ear Piercing', place: 'Periyanagalur Ayyanar Kovil', totalAmount: 150000 },
-    { name: 'Keda vettu', place: 'Kodukur Ayyanar Kovil', totalAmount: 90000 },
-    { name: 'Sigaram yellow water', place: 'Thiruvannamalai', totalAmount: 75000 },
-    { name: 'Thatha Death', place: 'Mannuzhi', totalAmount: 80500 },
-  ];
+  // events: any[] = [
+  //   { name: 'Marriage', place: 'Mannuzhi', totalAmount: 80000 },
+  //   { name: 'Ear Piercing', place: 'Periyanagalur Ayyanar Kovil', totalAmount: 150000 },
+  //   { name: 'Keda vettu', place: 'Kodukur Ayyanar Kovil', totalAmount: 90000 },
+  //   { name: 'Sigaram yellow water', place: 'Thiruvannamalai', totalAmount: 75000 },
+  //   { name: 'Thatha Death', place: 'Mannuzhi', totalAmount: 80500 },
+  // ];
 
   constructor(
     private apiService:ServiceService,
@@ -32,15 +32,18 @@ export class HomeComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.apiService.getAllEvents().subscribe({
-    //   next: (res: any) => {
-    //     this.events = res.data
-    //   },
-    //   error: (err: HttpErrorResponse) => {
-    //   },
-    // });
+    this.getEvents()
   }
 
+  getEvents(){
+    this.apiService.getAllEvents().subscribe({
+      next: (res: any) => {
+        this.events = res
+      },
+      error: (err: HttpErrorResponse) => {
+      },
+    });
+  }
 
   navigateToEvent(e:number) {
     this.router.navigate(['/folder/event']);
@@ -59,7 +62,9 @@ export class HomeComponent  implements OnInit {
     };
     this.apiService.addEvent(payload).subscribe({
       next: (res: any) => {
-        this.events = res.data
+        if(res){
+          this.getEvents();
+        }
       },
       error: (err: HttpErrorResponse) => {
       },

@@ -6,11 +6,11 @@
     <div class="events-list">
       <ion-card *ngFor="let event of events" (click)="navigateToEvent(event.id)">
         <ion-card-header>
-          <ion-card-title>{{ event.name }}</ion-card-title>
-          <ion-card-subtitle><i class="pi pi-map-marker"></i> {{ event.place }}</ion-card-subtitle>
+          <ion-card-title>{{ event.eventName }}</ion-card-title>
+          <ion-card-subtitle><i class="pi pi-map-marker"></i> {{ event.eventPlace }}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-          {{ event.totalAmount | currency:'INR':'symbol':'1.2-2' }}
+          {{ event.eventTotalAmount | currency:'INR':'symbol':'1.2-2' }}
         </ion-card-content>
       </ion-card>
     </div>

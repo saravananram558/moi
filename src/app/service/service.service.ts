@@ -10,10 +10,10 @@ export class ServiceService {
   constructor(private http: HttpClient) { }
 
   getAllEvents(){
-    return this.http.get(`${environment.url}/events/getAllEvents`); 
+    return this.http.get(`${environment.url}/events-management/getAllEvents`); 
   }
 
   addEvent(data:any){
-    return this.http.post(`${environment.url}/events/addEvent`,data)
+    return this.http.post(`${environment.url}/events-management/addEvent`,data)
   }
 }
