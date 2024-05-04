@@ -10,6 +10,7 @@ import { FolderPage } from './folder.page';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { MastersComponent } from './masters/masters.component';
+import { EventComponent } from './event/event.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { MastersComponent } from './masters/masters.component';
     IonicModule,
     FolderPageRoutingModule,
   ],
-  declarations: [FolderPage, DashboardComponent, HomeComponent, MastersComponent]
+  declarations: [FolderPage, DashboardComponent, HomeComponent, MastersComponent, EventComponent]
 })
 export class FolderPageModule {}

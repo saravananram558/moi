@@ -12,4 +12,8 @@ export class ServiceService {
   getAllEvents(){
     return this.http.get(`${environment.url}/events/getAllEvents`); 
   }
+
+  addEvent(data:any){
+    return this.http.post(`${environment.url}/events/addEvent`,data)
+  }
 }
