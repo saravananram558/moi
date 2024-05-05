@@ -12,13 +12,15 @@ import { HomeComponent } from './home/home.component';
 import { MastersComponent } from './masters/masters.component';
 import { EventComponent } from './event/event.component';
 import { TrashComponent } from './trash/trash.component';
-
+import { SharedModule } from 'src/shared/shared.module';
+import html2pdf from 'html2pdf.js';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     FolderPageRoutingModule,
+    SharedModule
   ],
   declarations: [FolderPage, DashboardComponent, HomeComponent, MastersComponent, EventComponent, TrashComponent]
 })

@@ -1,3 +1,13 @@
 ion-modal {
     background: #000;
 }
+
+.overlay{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    i{
+        display: flex;
+        gap: 5px;
+    }
+}

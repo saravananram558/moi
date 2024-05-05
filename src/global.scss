@@ -37,6 +37,11 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 @import "primeicons/primeicons.css";
 
+
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+CSS layer
 .ion-valid.sc-ion-input-md-h {
     --highlight-color: #333;
 }
@@ -151,4 +156,8 @@ ion-content{
         color: #000;
         font-weight: 500;
     }
+}
+
+.p-overlaypanel.overlayPanel .p-overlaypanel-content {
+    padding: 8px 12px;
 }

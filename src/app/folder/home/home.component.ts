@@ -14,19 +14,57 @@ export class HomeComponent  implements OnInit {
   events:any
   @ViewChild(IonModal) modal!: IonModal;
   showNoData:boolean = false;
-
+  // items: any[] = []
+  filteredItems!: any[];
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   eventPlace!: string;
   eventName!: string;
   amountCollector!: string;
   collectors: string[] = ['Collector 1', 'Collector 2', 'Collector 3'];
+
   constructor(
     private apiService:ServiceService,
     private router:Router,
-  ) { }
+  ) { 
+    this.filteredItems = this.events;
+  }
 
   ngOnInit() {
     this.getEvents()
+  }
+
+  filterItems(event: any) {
+    const searchTerm = event.target.value.toLowerCase();
+    // Filter items based on search term
+    if (searchTerm.length === 0) {
+      this.filteredItems = []; // Reset filteredItems when search term is empty
+      return;
+    }
+    this.apiService.getEventsSearch(searchTerm).subscribe(
+      (data: any) => {
+        // Update filteredItems with the data received from the API call
+        this.filteredItems = data;
+      },
+      (error: any) => {
+        console.error('Error fetching search results:', error);
+        // Handle error if needed
+      }
+    );
+  }
+
+  downloadAsPDF() {
+    const overlayPanelElement = document.querySelector('.overlayPanel');
+
+    if (overlayPanelElement) {
+      const options = {
+        filename: 'overlay_panel_content.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+
+      (html2pdf() as any).from(overlayPanelElement).set(options).save();
+    }
   }
 
   getEvents(){
@@ -83,3 +121,7 @@ export class HomeComponent  implements OnInit {
     }
   }
 }
+function html2pdf() {
+  throw new Error('Function not implemented.');
+}
+
