@@ -18,7 +18,7 @@ export class HomeComponent  implements OnInit {
   eventPlace!: string;
   eventName!: string;
   amountCollector!: string;
-
+  collectors: string[] = ['Collector 1', 'Collector 2', 'Collector 3'];
   constructor(
     private apiService:ServiceService,
     private router:Router,

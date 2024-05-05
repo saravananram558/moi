@@ -1,0 +1,16 @@
+.notice{
+    span{
+        color: #000;
+        display: flex;
+        gap: 5px;
+        background-color: antiquewhite;
+        width: 100%;
+        padding: 8px 12px;
+    }
+}
+
+  .btn.active {
+    background-color: #fff; 
+    color:#00092C ; 
+    border:0.5px solid #00092C ;
+  }

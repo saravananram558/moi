@@ -11,7 +11,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
   styleUrls: ['./masters.component.scss'],
 })
 export class MastersComponent  implements OnInit {
-  users:any
+  users:any;
   @ViewChild(IonModal) modal!: IonModal;
 
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';

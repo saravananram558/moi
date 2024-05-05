@@ -38,7 +38,9 @@
         <ion-input label="Enter Event Name" labelPlacement="stacked" type="text" placeholder="Event" [(ngModel)]="eventName"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input label="Enter Amount Collector Name" labelPlacement="stacked" type="text" placeholder="Amount Collector Name" [(ngModel)]="amountCollector"></ion-input>
+        <ion-select label="Select Amount Collector" [(ngModel)]="amountCollector">
+          <ion-select-option *ngFor="let collector of collectors" [value]="collector">{{ collector }}</ion-select-option>
+        </ion-select>
       </ion-item>
     </ion-content>
   </ng-template>

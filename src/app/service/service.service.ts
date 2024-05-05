@@ -40,4 +40,16 @@ export class ServiceService {
   addUser(data:any){
     return this.http.post(`${environment.url}/user-management/addUser`,data)
   }
+
+  getDeletedUsers(){
+    return this.http.get(`${environment.url}/user-management/getDeletedUsers`); 
+  }
+
+  getDeletedEvents(){
+    return this.http.get(`${environment.url}/events-management/getDeletedEvents`); 
+  }
+
+  getDeletedEventmembers(){
+    return this.http.get(`${environment.url}/events-management/getDeletedEventmembers`); 
+  }
 }

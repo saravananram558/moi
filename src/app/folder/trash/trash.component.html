@@ -1,0 +1,49 @@
+<div class="screen-wrapper ion-padding">
+  <div class="notice">
+    <span><i class="pi pi-info-circle"></i> Your trash should be here for 60 days</span>
+  </div>
+  <div class="btn-wrap">
+    <button class="btn"  [ngClass]="{'active': selectedDataSet === 'deletedEventMembers'}" (click)="showDeletedEventMembers()">Event Members</button>
+    <button class="btn"  [ngClass]="{'active': selectedDataSet === 'deletedEvents'}" (click)="showDeletedEvents()">Events</button>
+    <button class="btn"  [ngClass]="{'active': selectedDataSet === 'deletedUsers'}" (click)="showDeletedUsers()">Users</button>
+  </div>
+  <ion-content class="content-wrap" *ngIf="selectedDataSet === 'deletedUsers'">
+    <div class="card-list">
+      <ion-card *ngFor="let data of deletedUsers">
+        <ion-card-header>
+          <ion-card-title>{{ data.userName }}</ion-card-title>
+          <ion-card-subtitle><i class="pi pi-user"></i>  {{ data.roleName }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <i class="pi pi-phone"></i>  {{ data.mobileNumber}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-content>
+  <ion-content class="content-wrap" *ngIf="selectedDataSet === 'deletedEvents'">
+    <div class="card-list">
+      <ion-card *ngFor="let data of deletedEvents">
+        <ion-card-header>
+          <ion-card-title>{{ data.eventName }}</ion-card-title>
+          <ion-card-subtitle><i class="pi pi-map-marker"></i> {{ data.eventPlace }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{ data.eventTotalAmount | currency:'INR':'symbol':'1.2-2' }}
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-content>
+  <ion-content class="content-wrap" *ngIf="selectedDataSet === 'deletedEventMembers'">
+    <div class="card-list">
+      <ion-card *ngFor="let data of deletedEventMembers">
+        <ion-card-header>
+          <ion-card-title>{{ data.memberName }}</ion-card-title>
+          <ion-card-subtitle><i class="pi pi-map-marker"></i>  {{ data.memberPlace }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{ data.amount | currency:'INR':'symbol':'1.2-2' }}
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-content>
+</div>

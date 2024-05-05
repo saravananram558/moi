@@ -4,7 +4,7 @@
       <button class="btn" (click)="navigateToEvents()"><i class="pi pi-angle-left"></i>Back</button>
       <button class="btn" id="open-Member-modal"><i class="pi pi-plus"></i>Add Member</button>
     </div>
-    <div class="members-list">
+    <div class="card-list">
       <ion-card *ngFor="let member of members">
         <ion-card-header>
           <ion-card-title>{{ member.memberName }}</ion-card-title>

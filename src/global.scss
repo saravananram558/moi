@@ -37,6 +37,12 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 @import "primeicons/primeicons.css";
 
+.ion-valid.sc-ion-input-md-h {
+    --highlight-color: #333;
+}
+.sc-ion-input-md-h {
+    font-size: 14px;
+}
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: unset;
@@ -53,37 +59,34 @@ input[type="number"]::-webkit-inner-spin-button {
   .screen-wrapper::-webkit-scrollbar {
     display: none; /* Chrome, Safari, and Opera */
   }
-.toolbar-background {
-    --background-color: #F9F07A !important;
-}
 
 .screen-wrapper{
     height: 92vh;
+    .btn-wrap{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 10px;
+        .btn{
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            border-radius: 10px;
+            height: 38px;
+            background-color: #00092C;
+            color: #fff;
+            font-weight: 700;
+            padding: 8px 12px;
+            margin:5px;
+        }
+    }
     .content-wrap{
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100% !important;
-        .btn-wrap{
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-bottom: 10px;
-            .btn{
-                margin-bottom: 8px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 5px;
-                border-radius: 10px;
-                height: 38px;
-                background-color: #102C57;
-                color: #fff;
-                font-weight: 700;
-                padding: 8px 12px;
-                margin:5px;
-            }
-        }
         .card-list{
             padding: 0 2px;
             display: flex;
@@ -113,7 +116,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 ion-card{
     display: flex;
-    background-color:#CDFADB;
+    background-color:#FFF455;
     align-items: center;
     justify-content: space-between;
     margin: 0;

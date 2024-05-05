@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { MastersComponent } from './masters/masters.component';
 import { EventComponent } from './event/event.component';
+import { TrashComponent } from './trash/trash.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { EventComponent } from './event/event.component';
     IonicModule,
     FolderPageRoutingModule,
   ],
-  declarations: [FolderPage, DashboardComponent, HomeComponent, MastersComponent, EventComponent]
+  declarations: [FolderPage, DashboardComponent, HomeComponent, MastersComponent, EventComponent, TrashComponent]
 })
 export class FolderPageModule {}
