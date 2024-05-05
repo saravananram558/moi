@@ -11,6 +11,16 @@
         font-weight: 500;
     }
 }
+
+.screen-wrapper{
+    height: 80vh;
+}
+figure{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 .count-box-wrap{
     display: flex;
     gap: 20px;

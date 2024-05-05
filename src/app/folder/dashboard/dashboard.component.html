@@ -4,15 +4,16 @@
     <button class="btn"  [ngClass]="{'active': selectedDataSet === 'users'}" (click)="showChartUsers()">Users</button>
     <button class="btn"  [ngClass]="{'active': selectedDataSet === 'eventMembers'}" (click)="showChartEventMembers()">Event Members</button>
   </div>
+  <figure id="eventChart"></figure>
   <ion-content class="content-wrap" *ngIf="selectedDataSet === 'events'">
     <div class="dashboard-title">
       <span>My Events</span>
       <div class="total-count">
           <span class="count-name">Total Events</span>
-          <span class="count-number">{{0}}</span>
+          <span class="count-number">{{events?.length}}</span>
       </div>
     </div>
-    <div class="count-box-wrap">
+    <!-- <div class="count-box-wrap">
       <div class="level-count">
           <div class="level-count-head">Events And Amount</div>
           <div class="level-count-wrap" >
@@ -22,14 +23,14 @@
             </div>
           </div>
       </div>
-    </div>
+    </div> -->
   </ion-content>
   <ion-content class="content-wrap" *ngIf="selectedDataSet === 'users'">
     <div class="dashboard-title">
       <span>My User</span>
       <div class="total-count">
           <span class="count-name">Total Users</span>
-          <span class="count-number">{{events?.length}}</span>
+          <span class="count-number">{{users?.length}}</span>
       </div>
     </div>
     <div class="count-box-wrap">

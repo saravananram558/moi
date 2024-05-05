@@ -76,4 +76,8 @@ export class ServiceService {
   getDeletedEventmembers(){
     return this.http.get(`${environment.url}/events-management/getDeletedEventmembers`); 
   }
+
+  getAllEventsChart(){
+    return this.http.get(`${environment.url}/events-management/getAllEventsChart`); 
+  }
 }
