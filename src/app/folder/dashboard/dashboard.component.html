@@ -1,5 +1,10 @@
 <div class="screen-wrapper ion-padding">
-  <ion-content class="content-wrap">
+  <div class="btn-wrap">
+    <button class="btn"  [ngClass]="{'active': selectedDataSet === 'events'}" (click)="showChartEvents()">Events</button>
+    <button class="btn"  [ngClass]="{'active': selectedDataSet === 'users'}" (click)="showChartUsers()">Users</button>
+    <button class="btn"  [ngClass]="{'active': selectedDataSet === 'eventMembers'}" (click)="showChartEventMembers()">Event Members</button>
+  </div>
+  <ion-content class="content-wrap" *ngIf="selectedDataSet === 'events'">
     <div class="dashboard-title">
       <span>My Events</span>
       <div class="total-count">
@@ -14,6 +19,49 @@
             <div class="box" *ngFor="let event of events; let i = index" [ngClass]="getEventColor(event, i)">
                 <span class="count-name">{{event.eventName}}</span>
                 <span class="count-number">{{event.eventTotalAmount || 0}}</span>
+            </div>
+          </div>
+      </div>
+    </div>
+  </ion-content>
+  <ion-content class="content-wrap" *ngIf="selectedDataSet === 'users'">
+    <div class="dashboard-title">
+      <span>My User</span>
+      <div class="total-count">
+          <span class="count-name">Total Users</span>
+          <span class="count-number">{{events?.length}}</span>
+      </div>
+    </div>
+    <div class="count-box-wrap">
+      <div class="level-count">
+          <div class="level-count-head">User And Role</div>
+          <div class="level-count-wrap" >
+            <div class="box-cust" *ngFor="let user of users; let i = index" [ngClass]="getEventColor(user, i)">
+              <div class="box-left">
+                <span class="count-number">{{user.userName}}</span>
+                <span class="count-name"><i class="pi pi-user"></i> {{user.roleName || '-'}}</span>
+              </div>
+              <span class="count-name"><i class="pi pi-phone"></i> {{user.mobileNumber || '-'}}</span>
+            </div>
+          </div>
+      </div>
+    </div>
+  </ion-content>
+  <ion-content class="content-wrap" *ngIf="selectedDataSet === 'eventMembers'">
+    <div class="dashboard-title">
+      <span>My Event Members</span>
+      <div class="total-count">
+          <span class="count-name">Total Event Members</span>
+          <span class="count-number">{{0}}</span>
+      </div>
+    </div>
+    <div class="count-box-wrap">
+      <div class="level-count">
+          <div class="level-count-head">Event Members And Amount</div>
+          <div class="level-count-wrap" >
+            <div class="box" *ngFor="let member of eventMembers; let i = index" [ngClass]="getEventColor(member, i)">
+                <span class="count-name">{{member.eventMemberName}}</span>
+                <span class="count-number">{{member.eventTotalAmount || 0}}</span>
             </div>
           </div>
       </div>

@@ -21,15 +21,34 @@
             flex-direction: column;
             gap: 10px;
             .box{
+                display: flex;
+                flex-direction: column;
                 padding: 8px 12px;
                 border-radius: 6px;
-                .level-count-box{
+                .count-name{
+                    font-size: 14px;
+                }
+                .count-number{
+                    font-size: 18px;
+                }
+            }
+            .box-cust{
+                display: flex;
+                justify-content: space-between;
+                padding: 8px 12px;
+                border-radius: 6px;
+                .box-left{
                     display: flex;
                     flex-direction: column;
-                    padding: 8px 12px;
-                    border-radius: 6px;
-                    font-size: 16px;
-                    font-weight: 500;
+                }
+                .count-name{
+                    font-size: 18px;
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    .pi{
+                        font-size: 13px;
+                    }
                 }
             }
         }
