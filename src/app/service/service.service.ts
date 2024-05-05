@@ -25,12 +25,28 @@ export class ServiceService {
     return this.http.get(`${environment.url}/events-management/getEventMembers/${id}`); 
   }
 
+  removeEventMember(id:number){
+    return this.http.get(`${environment.url}/events-management/removeEventMember/${id}`); 
+  }
+
   removeEvent(id:number){
     return this.http.get(`${environment.url}/events-management/removeEvent/${id}`); 
   }
 
+  removeUser(id:number){
+    return this.http.get(`${environment.url}/user-management/removeUser/${id}`); 
+  }
+
+  restoreEventMember(id:number){
+    return this.http.get(`${environment.url}/events-management/restoreEventMember/${id}`); 
+  }
+
   restoreEvent(id:number){
     return this.http.get(`${environment.url}/events-management/restoreEvent/${id}`); 
+  }
+
+  restoreUser(id:number){
+    return this.http.get(`${environment.url}/user-management/restoreUser/${id}`); 
   }
 
   addMember(data:any){

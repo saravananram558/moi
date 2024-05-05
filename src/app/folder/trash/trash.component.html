@@ -16,6 +16,7 @@
         </ion-card-header>
         <ion-card-content>
           {{ data.amount | currency:'INR':'symbol':'1.2-2' }}
+          <i class="pi pi-undo" (click)="forEventMembers(true, data.id)"></i>
         </ion-card-content>
       </ion-card>
       <div *ngIf="noMembersData" class="noData">
@@ -32,7 +33,7 @@
         </ion-card-header>
         <ion-card-content>
           {{ data.eventTotalAmount | currency:'INR':'symbol':'1.2-2' || '-'}}
-          <i class="pi pi-undo" (click)="setOpen(true, data.id)"></i>
+          <i class="pi pi-undo" (click)="forEvents(true, data.id)"></i>
         </ion-card-content>
       </ion-card>
       <div *ngIf="noEventsData" class="noData">
@@ -49,7 +50,10 @@
           <ion-card-subtitle><i class="pi pi-user"></i>  {{ data.roleName }}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-          <i class="pi pi-phone"></i>  {{ data.mobileNumber}}
+          <div>
+            <i class="pi pi-phone"></i>  {{ data.mobileNumber}}
+          </div>
+          <i class="pi pi-undo" (click)="forUsers(true, data.id)"></i>
         </ion-card-content>
       </ion-card>
       <div *ngIf="noUsersData" class="noData">
@@ -60,10 +64,28 @@
 </div>
 
 <ion-alert
-  [isOpen]="isAlertOpen"
+  [isOpen]="isAlertEventMemberOpen"
+  header="Restore Event Member"
+  subHeader="It will restore this event member"
+  message="Are you sure want to restore"
+  [buttons]="eventMemberBtn"
+  (didDismiss)="forEventMembers(false,evenMemberId)"
+></ion-alert>
+
+<ion-alert
+  [isOpen]="isAlertEventOpen"
   header="Restore Event"
   subHeader="It will restore this event"
   message="Are you sure want to restore"
-  [buttons]="alertButtons"
-  (didDismiss)="setOpen(false,eventId)"
+  [buttons]="eventBtn"
+  (didDismiss)="forEvents(false,eventId)"
+></ion-alert>
+
+<ion-alert
+  [isOpen]="isAlertUserOpen"
+  header="Restore User"
+  subHeader="It will restore this user"
+  message="Are you sure want to restore"
+  [buttons]="userBtn"
+  (didDismiss)="forUsers(false,userId)"
 ></ion-alert>
