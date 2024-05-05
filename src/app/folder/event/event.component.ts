@@ -44,7 +44,8 @@ export class EventComponent  implements OnInit {
       this.members = res
     },
     error: (err: HttpErrorResponse) => {
-    },
+      console.error('Error fetching members:', err);
+    }
   });
  }
 
@@ -94,16 +95,15 @@ onWillDismiss(event: Event) {
   }
 }
 
-sendMessage(): void {
-  this.apiService.sendMessage(this.mobileNum, this.message).subscribe({
-    next: (res: any) => {
-      this.successMessage = 'Message sent successfully!';
-      this.errorMessage = '';
-    },
-    error: (err: HttpErrorResponse) => {
-    },
-  })
-  
-}
+  sendMessage(): void {
+    this.apiService.sendMessage(this.mobileNum, this.message).subscribe({
+      next: (res: any) => {
+        this.successMessage = 'Message sent successfully!';
+        this.errorMessage = '';
+      },
+      error: (err: HttpErrorResponse) => {
+      },
+    })
 
+  }
 }

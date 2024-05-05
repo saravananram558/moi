@@ -1,8 +1,8 @@
-<div class="event-wrap ion-padding">
+<div class="screen-wrapper ion-padding">
   <ion-content class="content-wrap">
-    <div class="member-btn-wrap">
-      <button class="member-btn" (click)="navigateToEvents()"><i class="pi pi-back"></i>Back</button>
-      <button class="member-btn" id="open-Member-modal"><i class="pi pi-plus"></i>Add Member</button>
+    <div class="btn-wrap">
+      <button class="btn" (click)="navigateToEvents()"><i class="pi pi-angle-left"></i>Back</button>
+      <button class="btn" id="open-Member-modal"><i class="pi pi-plus"></i>Add Member</button>
     </div>
     <div class="members-list">
       <ion-card *ngFor="let member of members">

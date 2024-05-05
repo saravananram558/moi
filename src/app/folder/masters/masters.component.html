@@ -1,16 +1,16 @@
-<div class="home-wrapper ion-padding">
+<div class="screen-wrapper ion-padding">
   <ion-content class="content-wrap">
-    <div class="event-btn-wrap">
-      <button class="event-btn" id="open-user-modal"><i class="pi pi-plus"></i> Add User</button>
+    <div class="btn-wrap">
+      <button class="btn" id="open-user-modal"><i class="pi pi-plus"></i> Add User</button>
     </div>
-    <div class="events-list">
+    <div class="card-list">
       <ion-card *ngFor="let user of users">
         <ion-card-header>
           <ion-card-title>{{ user.userName }}</ion-card-title>
           <ion-card-subtitle><i class="pi pi-user"></i>  {{ user.roleName }}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-          {{ user.mobileNumber}}
+          <i class="pi pi-phone"></i>  {{ user.mobileNumber}}
         </ion-card-content>
       </ion-card>
     </div>

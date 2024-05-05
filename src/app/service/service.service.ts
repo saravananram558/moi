@@ -29,6 +29,10 @@ export class ServiceService {
     return this.http.post(`${environment.url}/events-management/addMember`,data)
   }
 
+  updateMember(data:any){
+    return this.http.post(`${environment.url}/events-management/updateMember`,data)
+  }
+
   getAllUsers(){
     return this.http.get(`${environment.url}/user-management/getAllUsers`); 
   }

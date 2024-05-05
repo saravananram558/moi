@@ -42,7 +42,97 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: unset;
     margin: 0;
 }
-
+.screen-wrapper {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  .screen-wrapper {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  .screen-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+  }
 .toolbar-background {
     --background-color: #F9F07A !important;
-  }
+}
+
+.screen-wrapper{
+    height: 92vh;
+    .content-wrap{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100% !important;
+        .btn-wrap{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 10px;
+            .btn{
+                margin-bottom: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+                border-radius: 10px;
+                height: 38px;
+                background-color: #102C57;
+                color: #fff;
+                font-weight: 700;
+                padding: 8px 12px;
+                margin:5px;
+            }
+        }
+        .card-list{
+            padding: 0 2px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-bottom: 10px;
+            ion-card-content{
+                font-size: 16px;
+                color: #000;
+                font-weight: 700;
+                // display: flex;
+                // flex-direction: column;
+                // justify-content: space-between;
+                // .edit{
+                //     display: flex;
+                //     justify-content: flex-end;
+                //     gap: 5px;
+                //     i{
+                //         font-size: 11px;
+                //         cursor: pointer;
+                //     }
+                // }
+            }
+        }
+    }
+}
+
+ion-card{
+    display: flex;
+    background-color:#CDFADB;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+}
+ion-card-header{
+    text-align: left;
+    ion-card-title{
+        color: #333333;
+    }
+}
+ion-card-content{
+    font-size: 16px;
+    color: #000;
+    font-weight: 700;
+}
+
+
+ion-content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

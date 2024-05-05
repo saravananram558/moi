@@ -1,3 +1,22 @@
-<p>
-  dashboard works!
-</p>
+<div class="screen-wrapper ion-padding">
+  <ion-content class="content-wrap">
+    <div class="dashboard-title">
+      <span>My Events</span>
+      <div class="total-count">
+          <span class="count-name">Total Events</span>
+          <span class="count-number">{{0}}</span>
+      </div>
+    </div>
+    <div class="count-box-wrap">
+      <div class="level-count">
+          <div class="level-count-head">Events And Amount</div>
+          <div class="level-count-wrap" >
+            <div class="box" *ngFor="let event of events; let i = index" [ngClass]="getEventColor(event, i)">
+                <span class="count-name">{{event.eventName}}</span>
+                <span class="count-number">{{event.eventTotalAmount || 0}}</span>
+            </div>
+          </div>
+      </div>
+    </div>
+  </ion-content>
+</div>
