@@ -24,24 +24,47 @@ export class EventComponent  implements OnInit {
  mobileNum:string = '';
  successMessage: string = '';
  errorMessage: string = '';
+ isAlertOpen: boolean = false;
+ alertButtons = ['Remove'];
+ showNoData:boolean = false;
 
- constructor(
-   private apiService:ServiceService,
-   private router:Router,
-   private route: ActivatedRoute
- ) { }
+ constructor(private apiService:ServiceService,private router:Router,private route: ActivatedRoute) { }
 
- ngOnInit() {
-  this.route.queryParams.subscribe(params => {
-    this.eventId = params['id'];
-    this.getMembers(this.eventId)
-  });
- }
+  ngOnInit() {
+   this.route.queryParams.subscribe(params => {
+     this.eventId = params['id'];
+     this.getMembers(this.eventId)
+   });
+  }
+
+  setOpen(value: boolean) {
+    this.isAlertOpen = value;
+    if(!this.isAlertOpen){
+      this.removeEvent()
+    }
+  }
+  
+  removeEvent() {
+      this.apiService.removeEvent(this.eventId).subscribe({
+        next: (res: any) => {
+          this.router.navigate(['/folder/home']);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error('Error removing event:', err);
+          // Handle error
+        }
+      });
+  }
 
  getMembers(id:number){
   this.apiService.getAllMembers(id).subscribe({
     next: (res: any) => {
       this.members = res
+      if(this.members.length){
+        this.showNoData = false;
+      }else{
+        this.showNoData = true;
+      }
     },
     error: (err: HttpErrorResponse) => {
       console.error('Error fetching members:', err);

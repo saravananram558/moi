@@ -13,6 +13,10 @@
           {{ event.eventTotalAmount | currency:'INR':'symbol':'1.2-2' }}
         </ion-card-content>
       </ion-card>
+      <div *ngIf="showNoData" class="noData">
+        <img src="../../../assets/" alt="">
+        <span>No Events</span>
+      </div>
     </div>
   </ion-content>
 </div>

@@ -3,6 +3,7 @@
     <div class="btn-wrap">
       <button class="btn" (click)="navigateToEvents()"><i class="pi pi-angle-left"></i>Back</button>
       <button class="btn" id="open-Member-modal"><i class="pi pi-plus"></i>Add Member</button>
+      <button class="btn" (click)="setOpen(true)"><i class="pi pi-trash"></i></button>
     </div>
     <div class="card-list">
       <ion-card *ngFor="let member of members">
@@ -14,6 +15,9 @@
           {{ member.amount | currency:'INR':'symbol':'1.2-2' }}
         </ion-card-content>
       </ion-card>
+      <div *ngIf="showNoData" class="noData">
+        <img src="assets/no-data.svg" alt="">
+      </div>
     </div>
   </ion-content>
 </div>
@@ -51,6 +55,14 @@
   </ng-template>
 </ion-modal>
 
+<ion-alert
+  [isOpen]="isAlertOpen"
+  header="Remove Event"
+  subHeader="It will move this event to trash"
+  message="Are you sure want to remove"
+  [buttons]="alertButtons"
+  (didDismiss)="setOpen(false)"
+></ion-alert>
 <!-- <div>
   <label for="message">Message:</label>
   <textarea id="message" [(ngModel)]="message"></textarea>

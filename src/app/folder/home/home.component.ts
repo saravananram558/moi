@@ -13,6 +13,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
 export class HomeComponent  implements OnInit {
   events:any
   @ViewChild(IonModal) modal!: IonModal;
+  showNoData:boolean = false;
 
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   eventPlace!: string;
@@ -32,6 +33,11 @@ export class HomeComponent  implements OnInit {
     this.apiService.getAllEvents().subscribe({
       next: (res: any) => {
         this.events = res
+        if(this.events.length){
+          this.showNoData = false;
+        }else{
+          this.showNoData = true;
+        }
       },
       error: (err: HttpErrorResponse) => {
       },

@@ -6,11 +6,30 @@
         background-color: antiquewhite;
         width: 100%;
         padding: 8px 12px;
+        margin-bottom: 10px;
     }
+}
+
+.screen-wrapper{
+  height: 80vh;
 }
 
   .btn.active {
     background-color: #fff; 
     color:#00092C ; 
     border:0.5px solid #00092C ;
+  }
+
+  ion-card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    background-color: #FFF455;
+    .pi{
+      color: #000;
+    }
+    .card-content-md {
+      padding: 0;
+    }
   }

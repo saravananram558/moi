@@ -7,32 +7,6 @@
     <button class="btn"  [ngClass]="{'active': selectedDataSet === 'deletedEvents'}" (click)="showDeletedEvents()">Events</button>
     <button class="btn"  [ngClass]="{'active': selectedDataSet === 'deletedUsers'}" (click)="showDeletedUsers()">Users</button>
   </div>
-  <ion-content class="content-wrap" *ngIf="selectedDataSet === 'deletedUsers'">
-    <div class="card-list">
-      <ion-card *ngFor="let data of deletedUsers">
-        <ion-card-header>
-          <ion-card-title>{{ data.userName }}</ion-card-title>
-          <ion-card-subtitle><i class="pi pi-user"></i>  {{ data.roleName }}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <i class="pi pi-phone"></i>  {{ data.mobileNumber}}
-        </ion-card-content>
-      </ion-card>
-    </div>
-  </ion-content>
-  <ion-content class="content-wrap" *ngIf="selectedDataSet === 'deletedEvents'">
-    <div class="card-list">
-      <ion-card *ngFor="let data of deletedEvents">
-        <ion-card-header>
-          <ion-card-title>{{ data.eventName }}</ion-card-title>
-          <ion-card-subtitle><i class="pi pi-map-marker"></i> {{ data.eventPlace }}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          {{ data.eventTotalAmount | currency:'INR':'symbol':'1.2-2' }}
-        </ion-card-content>
-      </ion-card>
-    </div>
-  </ion-content>
   <ion-content class="content-wrap" *ngIf="selectedDataSet === 'deletedEventMembers'">
     <div class="card-list">
       <ion-card *ngFor="let data of deletedEventMembers">
@@ -44,6 +18,52 @@
           {{ data.amount | currency:'INR':'symbol':'1.2-2' }}
         </ion-card-content>
       </ion-card>
+      <div *ngIf="noMembersData" class="noData">
+        <img src="assets/no-data.svg" alt="">
+      </div>
+    </div>
+  </ion-content>
+  <ion-content class="content-wrap" *ngIf="selectedDataSet === 'deletedEvents'">
+    <div class="card-list">
+      <ion-card *ngFor="let data of deletedEvents">
+        <ion-card-header>
+          <ion-card-title>{{ data.eventName }}</ion-card-title>
+          <ion-card-subtitle><i class="pi pi-map-marker"></i> {{ data.eventPlace }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{ data.eventTotalAmount | currency:'INR':'symbol':'1.2-2' || '-'}}
+          <i class="pi pi-undo" (click)="setOpen(true, data.id)"></i>
+        </ion-card-content>
+      </ion-card>
+      <div *ngIf="noEventsData" class="noData">
+        <img src="../../../assets/no events.avif" alt="">
+        <span>No Events</span>
+      </div>
+    </div>
+  </ion-content>
+  <ion-content class="content-wrap" *ngIf="selectedDataSet === 'deletedUsers'">
+    <div class="card-list">
+      <ion-card *ngFor="let data of deletedUsers">
+        <ion-card-header>
+          <ion-card-title>{{ data.userName }}</ion-card-title>
+          <ion-card-subtitle><i class="pi pi-user"></i>  {{ data.roleName }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <i class="pi pi-phone"></i>  {{ data.mobileNumber}}
+        </ion-card-content>
+      </ion-card>
+      <div *ngIf="noUsersData" class="noData">
+        <img src="assets/no-data.svg" alt="">
+      </div>
     </div>
   </ion-content>
 </div>
+
+<ion-alert
+  [isOpen]="isAlertOpen"
+  header="Restore Event"
+  subHeader="It will restore this event"
+  message="Are you sure want to restore"
+  [buttons]="alertButtons"
+  (didDismiss)="setOpen(false,eventId)"
+></ion-alert>

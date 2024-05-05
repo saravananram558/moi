@@ -25,6 +25,14 @@ export class ServiceService {
     return this.http.get(`${environment.url}/events-management/getEventMembers/${id}`); 
   }
 
+  removeEvent(id:number){
+    return this.http.get(`${environment.url}/events-management/removeEvent/${id}`); 
+  }
+
+  restoreEvent(id:number){
+    return this.http.get(`${environment.url}/events-management/restoreEvent/${id}`); 
+  }
+
   addMember(data:any){
     return this.http.post(`${environment.url}/events-management/addMember`,data)
   }
