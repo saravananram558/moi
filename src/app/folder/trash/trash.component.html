@@ -31,6 +31,10 @@
           <ion-card-title>{{ data.eventName }}</ion-card-title>
           <ion-card-subtitle><i class="pi pi-map-marker"></i> {{ data.eventPlace }}</ion-card-subtitle>
         </ion-card-header>
+        <div class="remaing">
+          <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{data.remainingDays}} days remaing</span>
+        </div>
         <ion-card-content>
           {{ data.eventTotalAmount | currency:'INR':'symbol':'1.2-2' || '-'}}
           <i class="pi pi-undo" (click)="forEvents(true, data.id)"></i>

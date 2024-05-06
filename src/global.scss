@@ -99,6 +99,10 @@ input[type="number"]::-webkit-inner-spin-button {
     }
 }
 
+.inner-scroll .scroll-y::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar */
+}
+
 ion-card{
     display: flex;
     background-color:#FFF455;
@@ -130,7 +134,7 @@ ion-content{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 60vh;
+    height: 70vh;
     span{
         font-size: 18px;
         color: #000;

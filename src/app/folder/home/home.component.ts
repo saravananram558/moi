@@ -34,22 +34,25 @@ export class HomeComponent  implements OnInit {
   }
 
   filterItems(event: any) {
-    const searchTerm = event.target.value.toLowerCase();
+    const searchTerm = event.target.value
     // Filter items based on search term
-    if (searchTerm.length === 0) {
-      this.filteredItems = []; // Reset filteredItems when search term is empty
+    if (searchTerm && searchTerm.trim() !== '') {
+      this.apiService.getEventsSearch(searchTerm).subscribe(
+        (res: any) => {
+          this.events = res.data
+          if(this.events?.length){
+            this.showNoData = false;
+          }else{
+            this.showNoData = true;
+          }
+        },
+        (error: any) => {
+          console.error('Error fetching search results:', error);
+          // Handle error if needed
+        }
+      );
       return;
     }
-    this.apiService.getEventsSearch(searchTerm).subscribe(
-      (data: any) => {
-        // Update filteredItems with the data received from the API call
-        this.filteredItems = data;
-      },
-      (error: any) => {
-        console.error('Error fetching search results:', error);
-        // Handle error if needed
-      }
-    );
   }
 
   downloadAsPDF() {
@@ -82,8 +85,8 @@ export class HomeComponent  implements OnInit {
     });
   }
 
-  navigateToEvent(id:number) {
-    this.router.navigate(['/folder/event'], { queryParams: { id: id } });
+  navigateToEvent(id:number, name:string) {
+    this.router.navigate(['/folder/event'], { queryParams: { id: id ,name:name }});
   }  
 
   cancel() {

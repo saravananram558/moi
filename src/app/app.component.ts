@@ -7,7 +7,7 @@ import { ActivatedRoute, Router, Event, NavigationEnd } from '@angular/router';
 })
 export class AppComponent implements OnInit{
   public appPages = [
-    { title: 'Home', url: '/folder/home', icon: 'home' },
+    { title: 'All Events', url: '/folder/all-events', icon: 'home' },
     { title: 'Dashboard', url: '/folder/dashboard', icon: 'stats-chart' },
     { title: 'Masters', url: '/folder/masters', icon: 'shield' },
     { title: 'Trash', url: '/folder/trash', icon: 'trash' },

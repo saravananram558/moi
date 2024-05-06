@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ng-container *ngIf="folder === 'home'">
+    <ng-container *ngIf="folder === 'All Events'">
       <app-home></app-home>
     </ng-container>
     <ng-container *ngIf="folder === 'dashboard'">
@@ -20,7 +20,7 @@
     <ng-container *ngIf="folder === 'trash'">
       <app-trash></app-trash>
     </ng-container>
-    <ng-container *ngIf="folder === 'event'">
+    <ng-container *ngIf="showEventPage">
       <app-event></app-event>
     </ng-container>
 </ion-content>

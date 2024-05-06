@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 @NgModule({
   declarations: [],
   imports: [
@@ -10,11 +11,10 @@ import { ButtonModule } from 'primeng/button';
     FormsModule,
     ReactiveFormsModule,
     OverlayPanelModule,
-    ButtonModule,
-    ReactiveFormsModule
+    ButtonModule,ReactiveFormsModule, InputTextModule
   ],
   exports: [
-    OverlayPanelModule,ButtonModule
+    OverlayPanelModule,ButtonModule,InputTextModule
   ]
 })
 export class SharedModule { }

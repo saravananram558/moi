@@ -5,7 +5,7 @@ import { EventComponent } from './folder/event/event.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'register/login',
+    redirectTo: 'folder/all-events',
     pathMatch: 'full'
   },
   {

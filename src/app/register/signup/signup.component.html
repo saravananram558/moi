@@ -1,3 +1,18 @@
-<p>
-  signup works!
-</p>
+<div class="screen-wrapper ion-padding">
+  <ion-content class="content-wrap">
+    <img src="../../../assets/register/signup.webp" alt="">
+    <div class="input-contents">
+      <div class="input-feild">
+        <label for="userName">Name</label>
+        <input pInputText id="userName" [(ngModel)]="value" />
+      </div>
+      <div class="input-feild">
+        <label for="mobileNumber">Mobile Number</label>
+        <input pInputText id="mobileNumber" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="btn-wrap">
+      <button class="btn" [routerLink]="['register/login']">Sign Up</button>
+    </div>
+  </ion-content>
+</div>

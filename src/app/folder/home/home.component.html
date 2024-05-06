@@ -2,7 +2,7 @@
   <ion-content class="content-wrap">
     <div class="header-content">
       <ion-toolbar>
-        <ion-searchbar (ionChange)="filterItems($event)"></ion-searchbar>
+        <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
       </ion-toolbar>
       <div class="btn-wrap">
         <button class="btn"><i class="pi pi-plus" id="open-event-modal"></i></button>
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="card-list">
-      <ion-card *ngFor="let event of events" (click)="navigateToEvent(event.id)">
+      <ion-card *ngFor="let event of events" (click)="navigateToEvent(event.id, event.eventName)">
         <ion-card-header>
           <ion-card-title>{{ event.eventName }}</ion-card-title>
           <ion-card-subtitle><i class="pi pi-map-marker"></i> {{ event.eventPlace }}</ion-card-subtitle>

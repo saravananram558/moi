@@ -47,7 +47,7 @@ export class EventComponent  implements OnInit {
   removeEvent() {
       this.apiService.removeEvent(this.eventId).subscribe({
         next: (res: any) => {
-          this.router.navigate(['/folder/home']);
+          this.router.navigate(['/folder/all-events']);
         },
         error: (err: HttpErrorResponse) => {
           console.error('Error removing event:', err);
@@ -73,7 +73,7 @@ export class EventComponent  implements OnInit {
  }
 
  navigateToEvents(){
-  this.router.navigate(['/folder/home']);
+  this.router.navigate(['/folder/all-events']);
  }
 
  cancel() {
