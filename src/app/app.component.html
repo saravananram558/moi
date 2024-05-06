@@ -3,9 +3,15 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Sarvanan</ion-list-header>
-          <ion-note>hi&#64;saravanan.com</ion-note>
-
+          <div class="sidebar-header">
+            <div class="user-name">
+              <ion-list-header>Sarvanan</ion-list-header>
+              <ion-note>hi&#64;saravanan.com</ion-note>
+            </div>
+            <div class="btn-wrap">
+              <button class="btn" [routerLink]="['folder/login']"><i class="pi pi-sign-out"></i> Logout</button>
+            </div>
+          </div>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
             <ion-item routerDirection="root"
                       [routerLink]="[p.url]"

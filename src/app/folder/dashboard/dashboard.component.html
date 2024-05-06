@@ -1,10 +1,10 @@
 <div class="screen-wrapper ion-padding">
   <div class="btn-wrap">
-    <button class="btn">Events</button>
+    <!-- <button class="btn">Events</button> -->
     <button class="btn"  [ngClass]="{'active': selectedDataSet === 'users'}" (click)="showChartUsers()">Users</button>
     <button class="btn"  [ngClass]="{'active': selectedDataSet === 'eventMembers'}" (click)="showChartEventMembers()">Event Members</button>
   </div>
-  <figure id="eventChart"></figure>
+  <figure id="eventChart" style="position: relative;"></figure>
   <ion-content class="content-wrap" *ngIf="selectedDataSet === 'users'">
     <div class="dashboard-title">
       <span>My User</span>

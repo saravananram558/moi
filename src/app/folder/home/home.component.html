@@ -1,17 +1,19 @@
 <div class="screen-wrapper ion-padding">
   <ion-content class="content-wrap">
-    <ion-toolbar>
-      <ion-searchbar (ionChange)="filterItems($event)"></ion-searchbar>
-    </ion-toolbar>
-    <div class="btn-wrap">
-      <button class="btn" id="open-event-modal"><i class="pi pi-plus"></i> Add Event</button>
-      <button class="btn" (click)="op.toggle($event)"><i class="pi pi-ellipsis-v"></i></button>
-      <p-overlayPanel #op styleClass="overlayPanel">
-        <div class="overlay">
-          <i class="pi pi-share-alt">Share</i>
-          <i class="pi pi-download" (click)="downloadAsPDF()">Download</i>
-        </div>
-      </p-overlayPanel>
+    <div class="header-content">
+      <ion-toolbar>
+        <ion-searchbar (ionChange)="filterItems($event)"></ion-searchbar>
+      </ion-toolbar>
+      <div class="btn-wrap">
+        <button class="btn"><i class="pi pi-plus" id="open-event-modal"></i></button>
+        <button class="btn" (click)="op.toggle($event)"><i class="pi pi-ellipsis-v"></i></button>
+        <p-overlayPanel #op styleClass="overlayPanel">
+          <div class="overlay">
+            <i class="pi pi-share-alt">Share</i>
+            <i class="pi pi-download" (click)="downloadAsPDF()">Download</i>
+          </div>
+        </p-overlayPanel>
+      </div>
     </div>
     <div class="card-list">
       <ion-card *ngFor="let event of events" (click)="navigateToEvent(event.id)">

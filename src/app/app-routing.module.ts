@@ -5,12 +5,16 @@ import { EventComponent } from './folder/event/event.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/home',
+    redirectTo: 'register/login',
     pathMatch: 'full'
   },
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+  },
+  {
+    path: 'register/:id',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
 ];
 

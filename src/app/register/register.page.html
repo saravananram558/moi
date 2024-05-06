@@ -1,0 +1,14 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title >{{ register | titlecase}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ng-container *ngIf="register === 'login'">
+    <app-login></app-login>
+  </ng-container>
+  <ng-container *ngIf="register === 'signup'">
+    <app-signup></app-signup>
+  </ng-container>
+</ion-content>

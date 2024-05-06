@@ -71,7 +71,7 @@ export class HomeComponent  implements OnInit {
     this.apiService.getAllEvents().subscribe({
       next: (res: any) => {
         this.events = res
-        if(this.events.length){
+        if(this.events?.length){
           this.showNoData = false;
         }else{
           this.showNoData = true;

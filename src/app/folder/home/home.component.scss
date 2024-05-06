@@ -11,3 +11,16 @@ ion-modal {
         gap: 5px;
     }
 }
+
+.header-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    .btn-wrap{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0;
+    }
+}

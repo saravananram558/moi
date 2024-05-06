@@ -67,26 +67,6 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .screen-wrapper{
     height: 92vh;
-    .btn-wrap{
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin-bottom: 10px;
-        .btn{
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-            border-radius: 10px;
-            height: 38px;
-            background-color: #00092C;
-            color: #fff;
-            font-weight: 700;
-            padding: 8px 12px;
-            margin:5px;
-        }
-    }
     .content-wrap{
         display: flex;
         justify-content: center;
@@ -160,4 +140,25 @@ ion-content{
 
 .p-overlaypanel.overlayPanel .p-overlaypanel-content {
     padding: 8px 12px;
+}
+
+.btn-wrap{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 10px;
+    .btn{
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        border-radius: 10px;
+        height: 38px;
+        background-color: #00092C;
+        color: #fff;
+        font-weight: 700;
+        padding: 8px 12px;
+        margin:5px;
+    }
 }

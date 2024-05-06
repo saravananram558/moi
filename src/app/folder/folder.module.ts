@@ -13,7 +13,6 @@ import { MastersComponent } from './masters/masters.component';
 import { EventComponent } from './event/event.component';
 import { TrashComponent } from './trash/trash.component';
 import { SharedModule } from 'src/shared/shared.module';
-import html2pdf from 'html2pdf.js';
 @NgModule({
   imports: [
     CommonModule,

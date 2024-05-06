@@ -117,3 +117,9 @@ ion-note {
 ion-item.selected {
   --color: #fff;
 }
+
+.sidebar-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
