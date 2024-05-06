@@ -43,6 +43,29 @@ export class EventComponent  implements OnInit {
       this.removeEvent()
     }
   }
+
+
+  filterItems(event: any) {
+    const searchTerm = event.target.value
+    // Filter items based on search term
+    if (searchTerm && searchTerm.trim() !== '') {
+      this.apiService.getEventMembersSearch(searchTerm).subscribe(
+        (res: any) => {
+          this.members = res.data
+          if(this.members?.length){
+            this.showNoData = false;
+          }else{
+            this.showNoData = true;
+          }
+        },
+        (error: any) => {
+          console.error('Error fetching search results:', error);
+          // Handle error if needed
+        }
+      );
+      return;
+    }
+  }
   
   removeEvent() {
       this.apiService.removeEvent(this.eventId).subscribe({

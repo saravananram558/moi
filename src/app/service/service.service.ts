@@ -20,6 +20,11 @@ export class ServiceService {
   getEventsSearch(searchTerm : string){
     return this.http.get(`${environment.url}/events-management/getEventsSearch?search=` + searchTerm)
   }
+
+  getEventMembersSearch(searchTerm : string){
+    return this.http.get(`${environment.url}/events-management/getEventMembersSearch?search=` + searchTerm)
+  }
+
   addEvent(data:any){
     return this.http.post(`${environment.url}/events-management/addEvent`,data)
   }
