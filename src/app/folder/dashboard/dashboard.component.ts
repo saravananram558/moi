@@ -18,6 +18,7 @@ export class DashboardComponent  implements OnInit {
   chartData: any = []
   chartColor: any = []
   chartColors: any;
+  showNoData:boolean = false;
 
   constructor(
     private apiService:ServiceService,
@@ -58,6 +59,11 @@ export class DashboardComponent  implements OnInit {
 
       this.apiService.getAllEventsChart().subscribe({
         next: (res: any) => {
+          if(!this.chartData.length){
+            this.showNoData = true;
+          }else{
+            this.showNoData = false;
+          }
           this.chartData = res.topFive.map((e: any) => [e.eventName,e.itemCount,e.id]);
           this.chartData.push(["Others", res.othersTotalCount,0]);
           const eventsOrder = res.topFive.map((d: any) => d.eventName);
@@ -77,6 +83,7 @@ export class DashboardComponent  implements OnInit {
              this.chartColor.push("#848484");
             }
           }
+          
           const chartColors = d3.scaleOrdinal().domain(eventsOrder).range(this.chartColor);
           this.eventsSvg.selectAll("*").remove();
           const eventDonutChart = d3.pie<any>().value((d: any) => Number(d[1]));

@@ -18,6 +18,7 @@ export class MastersComponent  implements OnInit {
   name!: string;
   role!: string;
   mobileNumber!: string;
+  showNoData:boolean = false;
 
   constructor(
     private apiService:ServiceService,
@@ -32,6 +33,11 @@ export class MastersComponent  implements OnInit {
     this.apiService.getAllUsers().subscribe({
       next: (res: any) => {
         this.users = res
+        if(this.users?.length){
+          this.showNoData = false;
+        }else{
+          this.showNoData = true;
+        }
       },
       error: (err: HttpErrorResponse) => {
       },

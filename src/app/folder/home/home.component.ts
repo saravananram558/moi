@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ServiceService } from 'src/app/service/service.service';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ import { OverlayEventDetail } from '@ionic/core/components';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent  implements OnInit {
-  events:any
+  events:any;
+  eventForm!:FormGroup;
   @ViewChild(IonModal) modal!: IonModal;
   showNoData:boolean = false;
   // items: any[] = []
@@ -20,17 +22,35 @@ export class HomeComponent  implements OnInit {
   eventPlace!: string;
   eventName!: string;
   amountCollector!: string;
-  collectors: string[] = ['Collector 1', 'Collector 2', 'Collector 3'];
+  collectors!: string[];
+  isModalOpen: boolean = false;
 
   constructor(
     private apiService:ServiceService,
     private router:Router,
+    private formBuilder: FormBuilder
   ) { 
     this.filteredItems = this.events;
+    this.eventForm = this.formBuilder.group({
+      eventPlace: ['', Validators.required],
+      eventName: ['', Validators.required],
+      amountCollector: ['', Validators.required]
+    });
   }
 
   ngOnInit() {
     this.getEvents()
+    this.getUsers()
+  }
+  
+  getUsers(){
+    this.apiService.getAllUsers().subscribe({
+      next: (res: any) => {
+        this.collectors = res.map((event:any) => event.userName);
+      },
+      error: (err: HttpErrorResponse) => {
+      },
+    });
   }
 
   filterItems(event: any) {
@@ -87,6 +107,13 @@ export class HomeComponent  implements OnInit {
 
   navigateToEvent(id:number, name:string) {
     this.router.navigate(['/folder/event'], { queryParams: { id: id ,name:name }});
+  }
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
   }  
 
   cancel() {
@@ -94,27 +121,35 @@ export class HomeComponent  implements OnInit {
     this.eventName = ''; 
     this.eventPlace = ''; 
     this.amountCollector = ''; 
+    this.closeModal()
   }
   
   confirm() {
-    this.modal.dismiss(this.eventName, 'confirm');
-    let payload = {
-      eventName: this.eventName,
-      eventPlace: this.eventPlace,
-      amountCollector: this.amountCollector
-    };
-    this.apiService.addEvent(payload).subscribe({
-      next: (res: any) => {
-        if(res){
-          this.getEvents();
-          this.eventName = ''; 
-          this.eventPlace = ''; 
-          this.amountCollector = ''; 
-        }
-      },
-      error: (err: HttpErrorResponse) => {
-      },
-    })
+    if (this.eventForm.valid) { // Check if the form is valid before proceeding
+      this.modal.dismiss('confirm');
+  
+      const payload = {
+        eventName: this.eventForm.get('eventName')?.value,
+        eventPlace: this.eventForm.get('eventPlace')?.value,
+        amountCollector: this.eventForm.get('amountCollector')?.value
+      };
+  
+      console.log(payload, "check payload");
+  
+      this.apiService.addEvent(payload).subscribe({
+        next: (res: any) => {
+          if (res) {
+            this.getEvents();
+            this.eventForm.reset(); // Reset the form
+          }
+        },
+        error: (err: HttpErrorResponse) => {
+          // Handle error
+        },
+      });
+    } else {
+      // Handle form validation errors or prevent submission if the form is invalid
+    }
   }
   
   onWillDismiss(event: Event) {

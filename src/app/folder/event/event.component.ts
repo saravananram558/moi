@@ -11,24 +11,22 @@ import { OverlayEventDetail } from '@ionic/core/components';
   styleUrls: ['./event.component.scss'],
 })
 export class EventComponent  implements OnInit {
- // events:any
- @ViewChild(IonModal) modal!: IonModal;
- place!: string;
- name!: string;
- surName!: string;
- amount!: number;
- mobileNumber!: number;
- eventId!:number;
- members!:any;
- message: string = '';
- mobileNum:string = '';
- successMessage: string = '';
- errorMessage: string = '';
- isAlertOpen: boolean = false;
- alertButtons = ['Remove'];
- showNoData:boolean = false;
+  // events:any
+  @ViewChild(IonModal) modal!: IonModal;
+  place!: string;
+  name!: string;
+  surName!: string;
+  amount!: number;
+  mobileNumber!: number;
+  eventId!:number;
+  members!:any;
+  message: string = '';
+  mobileNum:string = '';
+  isAlertOpen: boolean = false;
+  alertButtons = ['Remove'];
+  showNoData:boolean = false;
 
- constructor(private apiService:ServiceService,private router:Router,private route: ActivatedRoute) { }
+  constructor(private apiService:ServiceService,private router:Router,private route: ActivatedRoute) { }
 
   ngOnInit() {
    this.route.queryParams.subscribe(params => {
@@ -43,7 +41,6 @@ export class EventComponent  implements OnInit {
       this.removeEvent()
     }
   }
-
 
   filterItems(event: any) {
     const searchTerm = event.target.value
@@ -99,61 +96,49 @@ export class EventComponent  implements OnInit {
   this.router.navigate(['/folder/all-events']);
  }
 
- cancel() {
-  this.modal.dismiss(null, 'cancel');
-  this.place = '';
-  this.name = '';
-  this.surName = '';
-  this.amount = 0;
-  this.mobileNumber = 0;
-}
-
-confirm() {
-  let payload = {
-    eventId:this.eventId,
-    memberPlace: this.place,
-    memberName: this.name,
-    memberSurName: this.surName,
-    amount: this.amount,
-    mobileNumber: this.mobileNumber
-  };
-  this.apiService.addMember(payload).subscribe({
-    next: (res: any) => {
-      if(res){
-        this.place = '';
-        this.name = '';
-        this.surName = '';
-        this.amount = 0;
-        this.mobileNumber = 0;
-        this.modal.dismiss(payload, 'confirm');
-        this.getMembers(this.eventId);
-      }
-    },
-    error: (err: HttpErrorResponse) => {
-    },
-  })
-  this.apiService.sendSMS('+916383635286', payload).subscribe(
-    () => console.log('SMS sent successfully'),
-    error => console.error('Failed to send SMS:', error)
-  );
-}
-
-onWillDismiss(event: Event) {
-  const ev = event as CustomEvent<OverlayEventDetail<string>>;
-  if (ev.detail.role === 'confirm') {
-    // this.message = `Hello, ${ev.detail.data}!`;
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+    this.place = '';
+    this.name = '';
+    this.surName = '';
+    this.amount = 0;
+    this.mobileNumber = 0;
   }
-}
 
-  sendMessage(): void {
-    this.apiService.sendMessage(this.mobileNum, this.message).subscribe({
+  confirm() {
+    let payload = {
+      eventId:this.eventId,
+      memberPlace: this.place,
+      memberName: this.name,
+      memberSurName: this.surName,
+      amount: this.amount,
+      mobileNumber: this.mobileNumber
+    };
+    this.apiService.addMember(payload).subscribe({
       next: (res: any) => {
-        this.successMessage = 'Message sent successfully!';
-        this.errorMessage = '';
+        if(res){
+          this.place = '';
+          this.name = '';
+          this.surName = '';
+          this.amount = 0;
+          this.mobileNumber = 0;
+          this.modal.dismiss(payload, 'confirm');
+          this.getMembers(this.eventId);
+        }
       },
       error: (err: HttpErrorResponse) => {
       },
     })
+    // this.apiService.sendSMS('+916383635286', payload).subscribe(
+    //   () => console.log('SMS sent successfully'),
+    //   error => console.error('Failed to send SMS:', error)
+    // );
+  }
 
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+      // this.message = `Hello, ${ev.detail.data}!`;
+    }
   }
 }

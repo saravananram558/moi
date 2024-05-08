@@ -1,9 +1,9 @@
 <div class="screen-wrapper ion-padding">
   <ion-content class="content-wrap">
-    <div class="header-content">
+    <div *ngIf="!showNoData" class="header-content">
       <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
       <div class="btn-wrap">
-        <button class="btn"><i class="pi pi-plus" id="open-event-modal"></i></button>
+        <button class="btn" (click)="openModal()"><i class="pi pi-plus"></i></button>
         <button class="btn" (click)="op.toggle($event)"><i class="pi pi-ellipsis-v"></i></button>
         <p-overlayPanel #op styleClass="overlayPanel">
           <div class="overlay">
@@ -23,15 +23,15 @@
           {{ event.eventTotalAmount | currency:'INR':'symbol':'1.2-2' }}
         </ion-card-content>
       </ion-card>
-      <div *ngIf="showNoData" class="noData">
-        <img src="../../../assets/no events.avif" alt="">
-        <span>No Events</span>
+      <div *ngIf="showNoData" class="noData btn-wrap">
+        <button class="btn" (click)="openModal()"><i class="pi pi-plus"></i>Add New Event</button>
+        <img src="../../../assets/animation.gif" alt="">
       </div>
     </div>
   </ion-content>
 </div>
 
-<ion-modal trigger="open-event-modal" (willDismiss)="onWillDismiss($event)">
+<ion-modal [isOpen]="isModalOpen" (willDismiss)="onWillDismiss($event)">
   <ng-template>
     <ion-header>
       <ion-toolbar>
@@ -45,17 +45,19 @@
     </ion-header>
     <ion-content class="ion-padding">
       <ion-title>Add Event</ion-title>
-      <ion-item>
-        <ion-input label="Enter Event Place" labelPlacement="stacked" type="text" placeholder="Place" [(ngModel)]="eventPlace"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input label="Enter Event Name" labelPlacement="stacked" type="text" placeholder="Event" [(ngModel)]="eventName"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-select label="Select Amount Collector" [(ngModel)]="amountCollector">
-          <ion-select-option *ngFor="let collector of collectors" [value]="collector">{{ collector }}</ion-select-option>
-        </ion-select>
-      </ion-item>
+      <form [formGroup]="eventForm">
+        <ion-item>
+          <ion-input label="Enter Event Place" labelPlacement="stacked" type="text" placeholder="Place" formControlName="eventPlace"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Enter Event Name" labelPlacement="stacked" type="text" placeholder="Event" formControlName="eventName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-select label="Select Amount Collector" formControlName="amountCollector">
+            <ion-select-option *ngFor="let collector of collectors" [value]="collector">{{ collector }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </form>
     </ion-content>
   </ng-template>
 </ion-modal>
