@@ -11,10 +11,10 @@ import { InputTextModule } from 'primeng/inputtext';
     FormsModule,
     ReactiveFormsModule,
     OverlayPanelModule,
-    ButtonModule,ReactiveFormsModule, InputTextModule
+    ButtonModule, InputTextModule
   ],
   exports: [
-    OverlayPanelModule,ButtonModule,InputTextModule
+    OverlayPanelModule,ButtonModule,InputTextModule, ReactiveFormsModule
   ]
 })
 export class SharedModule { }

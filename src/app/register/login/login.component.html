@@ -1,3 +1,20 @@
-<p>
-  login works!
-</p>
+<div class="screen-wrapper ion-padding">
+  <ion-content class="content-wrap">
+    <img src="../../../assets/register/login.jpg" alt="">
+    <form [formGroup]="loginForm">
+      <div class="input-contents">
+        <div class="input-feild">
+          <label for="userName">User Name</label>
+          <input pInputText id="userName" formControlName="userName" />
+        </div>
+        <div class="input-feild">
+          <label for="password">Password</label>
+          <input pInputText id="password" formControlName="password" />
+        </div>
+      </div>
+    </form>
+    <div class="btn-wrap">
+      <button class="btn" (click)="loginApp()">Login</button>
+    </div>
+  </ion-content>
+</div>

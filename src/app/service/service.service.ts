@@ -9,8 +9,16 @@ import { Observable } from 'rxjs';
 export class ServiceService {
   constructor(private http: HttpClient) { }
 
+  loginTo(data:any){
+    return this.http.post(`${environment.url}/user-management/loginToApp`, data);
+  }
+
   sendMessage(to: string, message: string): Observable<any> {
     return this.http.post(`${environment.url}/events-management/messages`, { to, message });
+  }
+
+  sendSMS(to: string, body: any) {
+    return this.http.post(`${environment.url}/user-management/send`, { to, body });
   }
 
   getAllEvents(){

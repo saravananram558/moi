@@ -1,9 +1,7 @@
 <div class="screen-wrapper ion-padding">
   <ion-content class="content-wrap">
     <div class="header-content">
-      <ion-toolbar>
-        <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
-      </ion-toolbar>
+      <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
       <div class="btn-wrap">
         <button class="btn"><i class="pi pi-plus" id="open-event-modal"></i></button>
         <button class="btn" (click)="op.toggle($event)"><i class="pi pi-ellipsis-v"></i></button>
@@ -40,13 +38,13 @@
         <ion-buttons slot="start">
           <ion-button (click)="cancel()">Cancel</ion-button>
         </ion-buttons>
-        <ion-title>Add Event</ion-title>
         <ion-buttons slot="end">
           <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
+      <ion-title>Add Event</ion-title>
       <ion-item>
         <ion-input label="Enter Event Place" labelPlacement="stacked" type="text" placeholder="Place" [(ngModel)]="eventPlace"></ion-input>
       </ion-item>

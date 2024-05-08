@@ -1,0 +1,28 @@
+.content-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img{
+        padding:50px 0;
+    }
+    .input-contents{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        .input-feild{
+            width: 90%;
+            input{
+                width: 100%;
+            }
+        }
+    }
+    .btn-wrap{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        .btn{
+            width: 50%;
+        }
+    }
+}

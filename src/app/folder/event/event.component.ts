@@ -132,6 +132,10 @@ confirm() {
     error: (err: HttpErrorResponse) => {
     },
   })
+  this.apiService.sendSMS('+916383635286', payload).subscribe(
+    () => console.log('SMS sent successfully'),
+    error => console.error('Failed to send SMS:', error)
+  );
 }
 
 onWillDismiss(event: Event) {

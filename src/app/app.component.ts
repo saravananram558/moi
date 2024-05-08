@@ -12,6 +12,7 @@ export class AppComponent implements OnInit{
     { title: 'Masters', url: '/folder/masters', icon: 'shield' },
     { title: 'Trash', url: '/folder/trash', icon: 'trash' },
   ];
+  
   public currentUrl!: string;
   constructor(private router: Router) {}
 
