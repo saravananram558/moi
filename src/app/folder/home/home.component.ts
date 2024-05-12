@@ -22,7 +22,7 @@ export class HomeComponent  implements OnInit {
   eventPlace!: string;
   eventName!: string;
   amountCollector!: string;
-  collectors!: string[];
+  collectors!: any;
   isModalOpen: boolean = false;
 
   constructor(
@@ -46,7 +46,7 @@ export class HomeComponent  implements OnInit {
   getUsers(){
     this.apiService.getAllUsers().subscribe({
       next: (res: any) => {
-        this.collectors = res.map((event:any) => event.userName);
+        this.collectors = res
       },
       error: (err: HttpErrorResponse) => {
       },
@@ -131,7 +131,7 @@ export class HomeComponent  implements OnInit {
       const payload = {
         eventName: this.eventForm.get('eventName')?.value,
         eventPlace: this.eventForm.get('eventPlace')?.value,
-        amountCollector: this.eventForm.get('amountCollector')?.value
+        amountCollector: this.eventForm.get('amountCollector')?.value,
       };
   
       console.log(payload, "check payload");

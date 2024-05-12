@@ -31,7 +31,7 @@
   </ion-content>
 </div>
 
-<ion-modal [isOpen]="isModalOpen" (willDismiss)="onWillDismiss($event)">
+<ion-modal [isOpen]="isModalOpen">
   <ng-template>
     <ion-header>
       <ion-toolbar>
@@ -54,7 +54,7 @@
         </ion-item>
         <ion-item>
           <ion-select label="Select Amount Collector" formControlName="amountCollector">
-            <ion-select-option *ngFor="let collector of collectors" [value]="collector">{{ collector }}</ion-select-option>
+            <ion-select-option *ngFor="let collector of collectors" [value]="collector.id">{{ collector.userName }}</ion-select-option>
           </ion-select>
         </ion-item>
       </form>

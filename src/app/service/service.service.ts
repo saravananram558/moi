@@ -69,6 +69,10 @@ export class ServiceService {
     return this.http.post(`${environment.url}/events-management/addMember`,data)
   }
 
+  getMemberById(id:number, eId:number){
+    return this.http.get(`${environment.url}/events-management/getMemberById/${id}/${eId}`)
+  }
+
   updateMember(data:any){
     return this.http.post(`${environment.url}/events-management/updateMember`,data)
   }

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceService } from 'src/app/service/service.service';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-event',
@@ -13,9 +14,9 @@ import { OverlayEventDetail } from '@ionic/core/components';
 export class EventComponent  implements OnInit {
   // events:any
   @ViewChild(IonModal) modal!: IonModal;
-  place!: string;
-  name!: string;
-  surName!: string;
+  memberPlace!: string;
+  memberName!: string;
+  memberSurName!: string;
   amount!: number;
   mobileNumber!: number;
   eventId!:number;
@@ -25,8 +26,21 @@ export class EventComponent  implements OnInit {
   isAlertOpen: boolean = false;
   alertButtons = ['Remove'];
   showNoData:boolean = false;
+  isModalOpen: boolean = false;
+  memberForm!:FormGroup;
+  showUpdateBtn:boolean = false;
+  showAddBtn:boolean = false;
+  memberId!:number;
 
-  constructor(private apiService:ServiceService,private router:Router,private route: ActivatedRoute) { }
+  constructor(private apiService:ServiceService,private router:Router,private route: ActivatedRoute,private formBuilder: FormBuilder) { 
+    this.memberForm = this.formBuilder.group({
+      memberPlace: [''],
+      memberName: [''],
+      memberSurName: [''],
+      amount: [''],
+      mobileNumber: ['']
+    });
+  }
 
   ngOnInit() {
    this.route.queryParams.subscribe(params => {
@@ -41,6 +55,16 @@ export class EventComponent  implements OnInit {
       this.removeEvent()
     }
   }
+
+  openModal() {
+    this.isModalOpen = true;
+    this.showUpdateBtn = false;
+    this.showAddBtn = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  } 
 
   filterItems(event: any) {
     const searchTerm = event.target.value
@@ -96,33 +120,32 @@ export class EventComponent  implements OnInit {
   this.router.navigate(['/folder/all-events']);
  }
 
+ resetForm(){
+  this.memberForm.reset()
+ }
+
   cancel() {
-    this.modal.dismiss(null, 'cancel');
-    this.place = '';
-    this.name = '';
-    this.surName = '';
-    this.amount = 0;
-    this.mobileNumber = 0;
+    this.isModalOpen = false;
+    this.resetForm()
+    this.getMembers(this.eventId)
   }
 
-  confirm() {
+  addMembers() {
     let payload = {
-      eventId:this.eventId,
-      memberPlace: this.place,
-      memberName: this.name,
-      memberSurName: this.surName,
-      amount: this.amount,
-      mobileNumber: this.mobileNumber
+      eventId: this.eventId,
+      memberPlace: this.memberForm.get('memberPlace')?.value,
+      memberName: this.memberForm.get('memberName')?.value,
+      memberSurName: this.memberForm.get('memberSurName')?.value,
+      amount: this.memberForm.get('amount')?.value,
+      mobileNumber: this.memberForm.get('mobileNumber')?.value
     };
     this.apiService.addMember(payload).subscribe({
       next: (res: any) => {
         if(res){
-          this.place = '';
-          this.name = '';
-          this.surName = '';
-          this.amount = 0;
-          this.mobileNumber = 0;
-          this.modal.dismiss(payload, 'confirm');
+          this.isModalOpen = false;
+          this.showAddBtn = true;
+          this.showUpdateBtn = false;
+          this.resetForm()
           this.getMembers(this.eventId);
         }
       },
@@ -135,10 +158,58 @@ export class EventComponent  implements OnInit {
     // );
   }
 
-  onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-      // this.message = `Hello, ${ev.detail.data}!`;
-    }
+  updateMember(id:number){
+    let updatePayload = {
+      memberId:id,
+      eventId: this.eventId,
+      memberPlace: this.memberForm.get('memberPlace')?.value,
+      memberName: this.memberForm.get('memberName')?.value,
+      memberSurName: this.memberForm.get('memberSurName')?.value,
+      amount: this.memberForm.get('amount')?.value,
+      mobileNumber: this.memberForm.get('mobileNumber')?.value
+    };
+    console.log(updatePayload, "checking payload");
+    this.apiService.updateMember(updatePayload).subscribe({ 
+      next: (res: any) => {
+        if(res){
+          this.isModalOpen = false;
+          this.showAddBtn = true;
+          this.showUpdateBtn = false;
+          this.resetForm()
+          this.getMembers(this.eventId);
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+      },
+    })
+  }
+
+  openCard(id:number, eId:number){
+    this.isModalOpen = true;
+    this.showAddBtn = false;
+    this.showUpdateBtn = true;
+    console.log(id, eId, "check id");
+    this.apiService.getMemberById(id, eId).subscribe({
+      next: (res:any)=>{
+        this.members = res
+        if(this.members.length > 0){
+          const memberData = this.members[0];
+          this.memberId=memberData.id,
+          this.memberForm.patchValue({
+            memberPlace: memberData.memberPlace,
+            memberName: memberData.memberName,
+            memberSurName: memberData.memberSurName,
+            amount: memberData.amount,
+            mobileNumber: memberData.mobileNumber
+          });
+          this.showNoData = false;
+        }else{
+          this.showNoData = true;
+        }
+      },
+      error:(err:HttpErrorResponse)=>{
+
+      },
+    })    
   }
 }

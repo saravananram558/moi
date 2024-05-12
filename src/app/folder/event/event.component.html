@@ -3,11 +3,11 @@
     <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
     <div class="btn-wrap">
       <button class="btn" (click)="navigateToEvents()"><i class="pi pi-angle-left"></i>Back</button>
-      <button class="btn" id="open-Member-modal"><i class="pi pi-plus"></i>Add Member</button>
+      <button class="btn" (click)="openModal()"><i class="pi pi-plus"></i>Add Member</button>
       <button class="btn" (click)="setOpen(true)"><i class="pi pi-trash"></i></button>
     </div>
     <div class="card-list">
-      <ion-card *ngFor="let member of members">
+      <ion-card *ngFor="let member of members" (click)="openCard(member.id, member.eventId)">
         <ion-card-header>
           <ion-card-title>{{ member.memberName }}</ion-card-title>
           <ion-card-subtitle><i class="pi pi-map-marker"></i> {{ member.memberPlace }}</ion-card-subtitle>
@@ -23,36 +23,41 @@
   </ion-content>
 </div>
 
-<ion-modal trigger="open-Member-modal" (willDismiss)="onWillDismiss($event)">
+<ion-modal [isOpen]="isModalOpen">
   <ng-template>
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-button (click)="cancel()">Cancel</ion-button>
         </ion-buttons>
-        <ion-buttons slot="end">
-          <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+        <ion-buttons slot="end" *ngIf="showAddBtn">
+          <ion-button (click)="addMembers()" [strong]="true">Add</ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end" *ngIf="showUpdateBtn">
+          <ion-button (click)="updateMember(memberId)" [strong]="true">update</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
       <ion-title>Add Member</ion-title>
       <div class="form-style">
-        <ion-item>
-          <ion-input label="Enter Place" labelPlacement="stacked" type="text" placeholder="Place" [(ngModel)]="place"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input label="Enter Name" labelPlacement="stacked" type="text" placeholder="Name" [(ngModel)]="name"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input label="Enter Sur Name" labelPlacement="stacked" type="text" placeholder="Sur Name" [(ngModel)]="surName"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input label="Enter Amount" labelPlacement="stacked" type="text" placeholder="Amount" [(ngModel)]="amount"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input label="Enter Mobile Number" labelPlacement="stacked" type="text" placeholder="Mobile Number" [(ngModel)]="mobileNumber"></ion-input>
-        </ion-item>
+        <form [formGroup]="memberForm">
+          <ion-item>
+            <ion-input label="Enter Place" labelPlacement="stacked" type="text" placeholder="Place" formControlName="memberPlace"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Enter Name" labelPlacement="stacked" type="text" placeholder="Name" formControlName="memberName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Enter Sur Name" labelPlacement="stacked" type="text" placeholder="Sur Name" formControlName="memberSurName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Enter Amount" labelPlacement="stacked" type="text" placeholder="Amount" formControlName="amount"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Enter Mobile Number" labelPlacement="stacked" type="text" placeholder="Mobile Number" formControlName="mobileNumber"></ion-input>
+          </ion-item>
+        </form>
       </div>
     </ion-content>
   </ng-template>
@@ -66,10 +71,3 @@
   [buttons]="alertButtons"
   (didDismiss)="setOpen(false)"
 ></ion-alert>
-<!-- <div>
-  <label for="message">Message:</label>
-  <textarea id="message" [(ngModel)]="message"></textarea>
-</div>
-<button (click)="sendMessage()">Send Message</button>
-<div *ngIf="successMessage">{{ successMessage }}</div>
-<div *ngIf="errorMessage">{{ errorMessage }}</div> -->
