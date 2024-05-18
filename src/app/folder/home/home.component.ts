@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceService } from 'src/app/service/service.service';
-import { IonModal } from '@ionic/angular';
+import { IonModal, ToastController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -28,7 +28,8 @@ export class HomeComponent  implements OnInit {
   constructor(
     private apiService:ServiceService,
     private router:Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastController: ToastController
   ) { 
     this.filteredItems = this.events;
     this.eventForm = this.formBuilder.group({
@@ -124,7 +125,7 @@ export class HomeComponent  implements OnInit {
     this.closeModal()
   }
   
-  confirm() {
+  confirm(position: 'top') {
     if (this.eventForm.valid) { // Check if the form is valid before proceeding
       this.modal.dismiss('confirm');
   
@@ -137,10 +138,16 @@ export class HomeComponent  implements OnInit {
       console.log(payload, "check payload");
   
       this.apiService.addEvent(payload).subscribe({
-        next: (res: any) => {
+        next: async (res: any) => {
           if (res) {
+            this.eventForm.reset();
+            const toast = await this.toastController.create({
+              message: 'Event Added Successfully',
+              duration: 1500,
+              position: position,
+            });
+            await toast.present();
             this.getEvents();
-            this.eventForm.reset(); // Reset the form
           }
         },
         error: (err: HttpErrorResponse) => {

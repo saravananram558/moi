@@ -223,3 +223,15 @@ ion-toolbar{
     --border-radius: 2px;
     color: #fff;
 }
+
+ion-toast {
+    --background: #FFEDD8; /* Background color */
+    --color: #240A34; /* Text color */
+    --padding: 16px; /* Padding */
+    font-size: 14px; /* Font size */
+    --border-radius: 4px;
+}
+
+.toast-layout-baseline .toast-content{
+    --border: 1px solid #240A34 !important;
+}

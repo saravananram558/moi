@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceService } from 'src/app/service/service.service';
-import { IonModal } from '@ionic/angular';
+import { IonModal, ToastController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -32,7 +32,7 @@ export class EventComponent  implements OnInit {
   showAddBtn:boolean = false;
   memberId!:number;
 
-  constructor(private apiService:ServiceService,private router:Router,private route: ActivatedRoute,private formBuilder: FormBuilder) { 
+  constructor(private apiService:ServiceService,private router:Router,private route: ActivatedRoute,private formBuilder: FormBuilder, private toastController: ToastController) { 
     this.memberForm = this.formBuilder.group({
       memberPlace: [''],
       memberName: [''],
@@ -66,13 +66,17 @@ export class EventComponent  implements OnInit {
     this.isModalOpen = false;
   } 
 
-  filterItems(event: any) {
+  filterItems(event: any, id:number) {
+    console.log(id);
+    
     const searchTerm = event.target.value
     // Filter items based on search term
     if (searchTerm && searchTerm.trim() !== '') {
-      this.apiService.getEventMembersSearch(searchTerm).subscribe(
+      this.apiService.getEventMembersSearch(searchTerm,id).subscribe(
         (res: any) => {
           this.members = res.data
+          console.log(res.data,"checking");
+          
           if(this.members?.length){
             this.showNoData = false;
           }else{
@@ -130,7 +134,7 @@ export class EventComponent  implements OnInit {
     this.getMembers(this.eventId)
   }
 
-  addMembers() {
+  addMembers(position: 'top') {
     let payload = {
       eventId: this.eventId,
       memberPlace: this.memberForm.get('memberPlace')?.value,
@@ -140,12 +144,18 @@ export class EventComponent  implements OnInit {
       mobileNumber: this.memberForm.get('mobileNumber')?.value
     };
     this.apiService.addMember(payload).subscribe({
-      next: (res: any) => {
+      next: async (res: any) => {
         if(res){
           this.isModalOpen = false;
           this.showAddBtn = true;
           this.showUpdateBtn = false;
           this.resetForm()
+          const toast = await this.toastController.create({
+            message: 'Member Added Successfully',
+            duration: 1500,
+            position: position,
+          });
+          await toast.present();
           this.getMembers(this.eventId);
         }
       },
@@ -158,7 +168,7 @@ export class EventComponent  implements OnInit {
     // );
   }
 
-  updateMember(id:number){
+  updateMember(id:number, position: 'top'){
     let updatePayload = {
       memberId:id,
       eventId: this.eventId,
@@ -170,12 +180,19 @@ export class EventComponent  implements OnInit {
     };
     console.log(updatePayload, "checking payload");
     this.apiService.updateMember(updatePayload).subscribe({ 
-      next: (res: any) => {
+      next: async (res: any) => {
         if(res){
           this.isModalOpen = false;
           this.showAddBtn = true;
           this.showUpdateBtn = false;
           this.resetForm()
+          const toast = await this.toastController.create({
+            message: 'Member Updated Successfully',
+            // duration: 1500,
+            duration: 0,
+            position: position,
+          });
+          await toast.present();
           this.getMembers(this.eventId);
         }
       },

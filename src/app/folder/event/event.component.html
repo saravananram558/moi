@@ -1,6 +1,6 @@
 <div class="screen-wrapper ion-padding">
   <ion-content class="content-wrap">
-    <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
+    <ion-searchbar (ionInput)="filterItems($event,eventId)"></ion-searchbar>
     <div class="btn-wrap">
       <button class="btn" (click)="navigateToEvents()"><i class="pi pi-angle-left"></i>Back</button>
       <button class="btn" (click)="openModal()"><i class="pi pi-plus"></i>Add Member</button>
@@ -31,15 +31,16 @@
           <ion-button (click)="cancel()">Cancel</ion-button>
         </ion-buttons>
         <ion-buttons slot="end" *ngIf="showAddBtn">
-          <ion-button (click)="addMembers()" [strong]="true">Add</ion-button>
+          <ion-button (click)="addMembers('top')" [strong]="true">Add</ion-button>
         </ion-buttons>
         <ion-buttons slot="end" *ngIf="showUpdateBtn">
-          <ion-button (click)="updateMember(memberId)" [strong]="true">update</ion-button>
+          <ion-button (click)="updateMember(memberId, 'top')" [strong]="true">update</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <ion-title>Add Member</ion-title>
+      <ion-title *ngIf="showAddBtn">Add Member</ion-title>
+      <ion-title *ngIf="showUpdateBtn">Update Member</ion-title>
       <div class="form-style">
         <form [formGroup]="memberForm">
           <ion-item>

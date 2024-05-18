@@ -36,7 +36,12 @@ export class LoginComponent  implements OnInit {
       };
       this.apiService.loginTo(payload).subscribe(
         (res: any) => {
-          this.router.navigate(['/folder/all-events']);
+          if (res) {
+            this.router.navigate(['/folder/all-events']);
+          } else {
+            console.log('Login failed. Invalid username or password.');
+            // Handle login failure (e.g., display error message)
+          }
         },
         (error: HttpErrorResponse) => {
           console.error('Error fetching search results:', error);

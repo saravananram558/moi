@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">moi-mobile-app</string>
+    <string name="title_activity_main">moi-mobile-app</string>
+    <string name="package_name">com.vasul.app</string>
+    <string name="custom_url_scheme">com.vasul.app</string>
+</resources>

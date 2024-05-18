@@ -1,9 +1,10 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'com.vasul.app',
   appName: 'moi-mobile-app',
-  webDir: 'www'
+  webDir: 'www',
+  bundledWebRuntime: false
 };
 
 export default config;

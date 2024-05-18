@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonModal } from '@ionic/angular';
+import { IonModal, ToastController } from '@ionic/angular';
 import { ServiceService } from 'src/app/service/service.service';
 import { OverlayEventDetail } from '@ionic/core/components';
 
@@ -23,6 +23,7 @@ export class MastersComponent  implements OnInit {
   constructor(
     private apiService:ServiceService,
     private router:Router,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -51,7 +52,7 @@ export class MastersComponent  implements OnInit {
     this.mobileNumber = ''; 
   }
   
-  confirm() {
+  confirm(position: 'top') {
     this.modal.dismiss(this.name, 'confirm');
     let payload = {
       userName: this.name,
@@ -59,12 +60,18 @@ export class MastersComponent  implements OnInit {
       mobileNumber: this.mobileNumber
     };
     this.apiService.addUser(payload).subscribe({
-      next: (res: any) => {
+      next: async (res: any) => {
         if(res){
           this.getUsers();
           this.name = ''; 
           this.role = ''; 
           this.mobileNumber = ''; 
+          const toast = await this.toastController.create({
+            message: 'User Added Successfully',
+            duration: 1500,
+            position: position,
+          });
+          await toast.present();
         }
       },
       error: (err: HttpErrorResponse) => {
