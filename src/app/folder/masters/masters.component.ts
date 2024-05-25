@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { IonModal, ToastController } from '@ionic/angular';
 import { ServiceService } from 'src/app/service/service.service';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { Observable } from 'rxjs';  
+import { FirebaseService, Todo } from 'src/app/service/firebase.service';
 
 @Component({
   selector: 'app-masters',
@@ -19,15 +21,18 @@ export class MastersComponent  implements OnInit {
   role!: string;
   mobileNumber!: string;
   showNoData:boolean = false;
-
+  public todos!: Observable<Todo[]>;  
+  
   constructor(
     private apiService:ServiceService,
     private router:Router,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private fireService: FirebaseService
   ) { }
 
   ngOnInit() {
     this.getUsers()
+    this.todos = this.fireService.getTodos();  
   }
 
   getUsers(){

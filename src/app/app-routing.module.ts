@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { EventComponent } from './folder/event/event.component';
 
 const routes: Routes = [
   {

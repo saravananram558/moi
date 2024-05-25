@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+// import { FirebaseService, Todo } from 'src/app/service/firebase.service';
 import { ServiceService } from 'src/app/service/service.service';
 
 @Component({
@@ -8,6 +10,7 @@ import { ServiceService } from 'src/app/service/service.service';
   templateUrl: './trash.component.html',
   styleUrls: ['./trash.component.scss'],
 })
+
 export class TrashComponent  implements OnInit {
   deletedUsers:any;
   deletedEvents:any;
@@ -25,15 +28,66 @@ export class TrashComponent  implements OnInit {
   evenMemberId!:number;
   eventId!:number;
   userId!:number;
-
+  // todo: Todo = {  
+  //   name: '',  
+  //   notes: ''  
+  // };
+  
   constructor(
     private apiService:ServiceService,
     private router:Router,
+    private activatedRoute:ActivatedRoute,
+    // private fireService: FirebaseService,
+    private toastController: ToastController,
   ) { }
 
   ngOnInit() {
     this.getAllDeletedData()
   }
+
+  // ionViewWillEnter() {  
+  //   const id = this.activatedRoute.snapshot.paramMap.get('id');  
+  //   // if (id) {  
+  //   //   this.fireService.getTodo(id).subscribe(todo => {  
+  //   //     this.todo = todo;  
+  //   //   });  
+  //   // }  
+  // }  
+  
+  // addTodo() {  
+    
+  //   this.fireService.addTodo(this.todo).then(() => {  
+  //     console.log(this.todo);
+  //     this.router.navigateByUrl('/');  
+  //     this.showToast('todo added');  
+  //   }, err => {  
+  //     this.showToast('There was a some problem in adding your todo :(');  
+  //   });  
+  // }  
+  
+  // deleteTodo() {  
+  //   this.fireService.deleteTodo(this.todo.id!).then(() => {  
+  //     this.router.navigateByUrl('/');  
+  //     this.showToast('todo deleted');  
+  //   }, err => {  
+  //     this.showToast('There was a some problem in deleting your todo :(');  
+  //   });  
+  // }  
+  
+  // updateTodo() {  
+  //   this.fireService.updateTodo(this.todo).then(() => {  
+  //     this.showToast('todo updated');  
+  //   }, err => {  
+  //     this.showToast('There was a some problem in updating your todo :(');  
+  //   });  
+  // }  
+  
+  // showToast(msg:any) {  
+  //   this.toastController.create({  
+  //     message: msg,  
+  //     duration: 2000  
+  //   }).then(toast => toast.present());  
+  // }
 
   forEventMembers(value: boolean, id:any) {
     this.isAlertEventMemberOpen = value;
