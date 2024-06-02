@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirebaseService, Login } from 'src/app/service/firebase.service';
 import { ServiceService } from 'src/app/service/service.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signup',
@@ -11,14 +12,15 @@ import { ServiceService } from 'src/app/service/service.service';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent  implements OnInit {
-  value: string | undefined;
   signupForm!:FormGroup;
+  loginBtn:boolean = false;
 
   constructor(
     private router:Router,
     private fb: FormBuilder,
     private fireService: FirebaseService,
-    private apiService:ServiceService
+    private apiService:ServiceService,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -42,30 +44,69 @@ export class SignupComponent  implements OnInit {
     }
   }
 
-  signupUser(){
+  async signupUser(position:'top'){
     if (this.signupForm.valid) {
       const payload = {
         userName: this.signupForm.get('userName')!.value,
         email: this.signupForm.get('email')!.value,
         password: this.signupForm.get('password')!.value,
       };      
-      this.apiService.signUpTo(payload).subscribe(
-        (res: any) => {
-          if (res) {
+      this.apiService.signUpTo(payload).subscribe({
+        next: async (res: any) => {
+          if (res.success) {
+            localStorage.setItem('existEmail', payload.email);
+            const toast = await this.toastController.create({
+              message: res.message,
+              duration: 1500,
+              position: position,
+            });
+            await toast.present();
             this.router.navigate(['/register/login']);
-          } else {
-            console.log('Login failed. Invalid username or password.');
-            // Handle login failure (e.g., display error message)
+          }else if (!res.success) {
+            localStorage.setItem('existEmail', payload.email);
+            const toast = await this.toastController.create({
+              message: res.message,
+              duration: 1500,
+              position: position,
+              color: 'warning'
+            });
+            await toast.present();
+            this.signupForm.disable()
+            this.loginBtn = true;
           }
         },
-        (error: HttpErrorResponse) => {
-          console.error('Error fetching search results:', error);
-          // Handle error if needed
+        error: async (err: any) => {
+          localStorage.clear()
+          const toast = await this.toastController.create({
+            message: 'An error occurred',
+            duration: 1500,
+            position: position,
+            color: 'danger'
+          });
+          await toast.present();
         }
-      );
-    } else {
-    // Handle form validation errors if needed
-    console.error('Form is invalid');
+      })
+    }else{
+      this.signupForm.markAllAsTouched()
+      const toast = await this.toastController.create({
+        message: 'Invalid',
+        duration: 1500,
+        position: position,
+        color: 'warning'
+      });
+      await toast.present();
     }
+  }
+
+  async loginUser(position:'top'){
+    const email = this.signupForm.get('email')!.value;
+    localStorage.setItem('existEmail', email);
+    const toast = await this.toastController.create({
+      message: 'welcome back! Please login',
+      duration: 1500,
+      position: position,
+    });
+    await toast.present();
+    this.router.navigate(['/register/login']);
   }
 }

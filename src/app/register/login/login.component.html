@@ -3,18 +3,35 @@
     <img src="../../../assets/register/login.jpg" alt="">
     <form [formGroup]="loginForm">
       <div class="input-contents">
-        <div class="input-feild">
-          <label for="userName">User Name</label>
-          <input pInputText id="userName" formControlName="userName" />
+        <div class="input-field">
+          <label for="email">Email</label>
+          <input pInputText id="email" formControlName="email" />
         </div>
-        <div class="input-feild">
+        <div class="input-field">
           <label for="password">Password</label>
-          <input pInputText id="password" formControlName="password" />
+          <p-password id="password" formControlName="password" [feedback]="false" [toggleMask]="true"/>
+          <div class="text-danger-wrap">
+            <div *ngIf="incorrectPassword" class="text-danger">
+              Incorrect password.
+            </div>
+          </div>
         </div>
       </div>
     </form>
     <div class="btn-wrap">
-      <button class="btn" (click)="loginApp()">Login</button>
+      <button class="btn" (click)="loginApp('top')">Login</button>
+      <!-- after few attempts we want to sent them to signup -->
+      <!-- <button *ngIf="!signinBtn" class="btn" (click)="loginApp('top')">Login</button> -->
+      <!-- <button *ngIf="signinBtn" class="btn" (click)="signupUser('top')">Go to sign up</button> -->
+    </div>
+    <div class="or-line">
+      <span class="divider-line"></span>
+      <span class="divider-text">or</span>
+      <span class="divider-line"></span>
+    </div>
+    <div class="btn-wrap">
+      <span>Are you new to here? <span style="text-decoration: underline;color: blue;" [routerLink]="['/register/signup']">sign up</span></span>
+      <!-- <button *ngIf="!signinBtn" class="btn" (click)="signupUser('top')">Sign in</button> -->
     </div>
   </ion-content>
 </div>

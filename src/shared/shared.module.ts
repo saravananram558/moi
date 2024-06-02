@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
 @NgModule({
   declarations: [],
   imports: [
@@ -11,10 +12,10 @@ import { InputTextModule } from 'primeng/inputtext';
     FormsModule,
     ReactiveFormsModule,
     OverlayPanelModule,
-    ButtonModule, InputTextModule
+    ButtonModule, InputTextModule,PasswordModule
   ],
   exports: [
-    OverlayPanelModule,ButtonModule,InputTextModule, ReactiveFormsModule,FormsModule
+    OverlayPanelModule,ButtonModule,InputTextModule, ReactiveFormsModule,FormsModule,PasswordModule
   ]
 })
 export class SharedModule { }

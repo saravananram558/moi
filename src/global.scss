@@ -237,3 +237,25 @@ ion-toast {
 .toast-layout-baseline .toast-content{
     --border: 1px solid #240A34 !important;
 }
+
+.p-password{
+    width: 100%;
+    height: 32px;
+    border-radius: 4px;
+    &:focus{
+        box-shadow: none;
+    }
+    .p-inputtext {
+        padding-right: 0;
+        width: 100%;
+        padding: 8px 12px;
+        border-radius: 4px;
+    }
+    .p-inputtext:enabled:focus{
+        box-shadow: none;
+    }
+    .p-disabled{
+        touch-action: manipulation;
+        opacity: 0.6;
+    }
+}

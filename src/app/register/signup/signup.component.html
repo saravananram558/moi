@@ -13,11 +13,11 @@
         </div>
         <div class="input-field">
           <label for="password">Password</label>
-          <input pInputText id="password" formControlName="password" />
+          <p-password id="password" formControlName="password" [feedback]="false" [toggleMask]="true"/>
         </div>
         <div class="input-field">
           <label for="confirmPassword">Confirm Password</label>
-          <input pInputText id="confirmPassword" formControlName="confirmPassword" (input)="confirmPasswordValidator()" />
+          <p-password id="confirmPassword" formControlName="confirmPassword" [feedback]="false" [toggleMask]="true" (input)="confirmPasswordValidator()"/>
           <div class="text-danger-wrap">
             <div *ngIf="signupForm.get('confirmPassword')?.errors?.['passwordMismatch']" class="text-danger">
               Passwords do not match.
@@ -27,7 +27,16 @@
       </div>
     </form>
     <div class="btn-wrap">
-      <button class="btn" (click)="signupUser()">Sign Up</button>
+      <button *ngIf="!loginBtn" class="btn" (click)="signupUser('top')">Sign Up</button>
+      <button *ngIf="loginBtn" class="btn" (click)="loginUser('top')">Go to Login</button>
+    </div>
+    <div class="or-line">
+      <span class="divider-line"></span>
+      <span class="divider-text">or</span>
+      <span class="divider-line"></span>
+    </div>
+    <div class="btn-wrap">
+      <span>Already an existing user? <span style="text-decoration: underline;color: blue;" [routerLink]="['/register/login']">login</span></span>
     </div>
   </ion-content>
 </div>
