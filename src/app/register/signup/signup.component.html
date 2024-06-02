@@ -1,18 +1,33 @@
 <div class="screen-wrapper ion-padding">
   <ion-content class="content-wrap">
     <img src="../../../assets/register/signup.webp" alt="">
-    <div class="input-contents">
-      <div class="input-feild">
-        <label for="userName">Name</label>
-        <input pInputText id="userName" [(ngModel)]="value" />
+    <form [formGroup]="signupForm">
+      <div class="input-contents">
+        <div class="input-field">
+          <label for="userName">User Name</label>
+          <input pInputText id="userName" formControlName="userName" />
+        </div>
+        <div class="input-field">
+          <label for="email">Email</label>
+          <input pInputText id="email" formControlName="email" />
+        </div>
+        <div class="input-field">
+          <label for="password">Password</label>
+          <input pInputText id="password" formControlName="password" />
+        </div>
+        <div class="input-field">
+          <label for="confirmPassword">Confirm Password</label>
+          <input pInputText id="confirmPassword" formControlName="confirmPassword" (input)="confirmPasswordValidator()" />
+          <div class="text-danger-wrap">
+            <div *ngIf="signupForm.get('confirmPassword')?.errors?.['passwordMismatch']" class="text-danger">
+              Passwords do not match.
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="input-feild">
-        <label for="mobileNumber">Mobile Number</label>
-        <input pInputText id="mobileNumber" [(ngModel)]="value" />
-      </div>
-    </div>
+    </form>
     <div class="btn-wrap">
-      <button class="btn" [routerLink]="['register/login']">Sign Up</button>
+      <button class="btn" (click)="signupUser()">Sign Up</button>
     </div>
   </ion-content>
 </div>

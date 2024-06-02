@@ -181,14 +181,16 @@ ion-content{
         justify-content: center;
         align-items: center;
         gap: 5px;
-        border-radius: 10px;
+        border-radius: 4px;
         height: 38px;
-        background-color: #240A34;
+        // background-color: #240A34;
+        background-color: #891652;
         color: #fff;
         font-weight: 700;
         padding: 8px 12px;
         margin:5px;
-        border: 0.5px solid #240A34;
+        // border: 0.5px solid #240A34;
+        border: 0.5px solid #891652;
     }
 }
 

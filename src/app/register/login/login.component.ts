@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FirebaseService, Login } from 'src/app/service/firebase.service';
 import { ServiceService } from 'src/app/service/service.service';
 
 @Component({
@@ -10,15 +11,13 @@ import { ServiceService } from 'src/app/service/service.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent  implements OnInit {
-  value: string | undefined;
   loginForm!:FormGroup;
-  userName: any;
-  password: any;
 
   constructor(
-    private apiService:ServiceService,
     private router:Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private fireService: FirebaseService,
+    private apiService:ServiceService
   ) { }
 
   ngOnInit() {
@@ -33,7 +32,7 @@ export class LoginComponent  implements OnInit {
       const payload = {
         username: this.loginForm.get('userName')!.value,
         password: this.loginForm.get('password')!.value
-      };
+      };      
       this.apiService.loginTo(payload).subscribe(
         (res: any) => {
           if (res) {
@@ -48,6 +47,18 @@ export class LoginComponent  implements OnInit {
           // Handle error if needed
         }
       );
+          // this.fireService.loginTo(loginPayload).subscribe(
+      //   (res:any) => {  
+      //     if(res){
+      //       this.router.navigate(['/folder/all-events']);
+      //     } else {
+      //       console.log('Login failed. Invalid username or password.');
+      //     }
+      //   },
+      //   (error: HttpErrorResponse) => {
+      //     console.error('Error fetching search results:', error);
+      //   }
+      // );
     } else {
       // Handle form validation errors if needed
       console.error('Form is invalid');

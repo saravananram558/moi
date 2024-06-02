@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {  AngularFirestoreModule } from '@angular/fire/compat/firestore';  
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

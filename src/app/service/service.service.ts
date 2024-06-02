@@ -13,6 +13,10 @@ export class ServiceService {
     return this.http.post(`${environment.url}/user-management/loginToApp`, data);
   }
 
+  signUpTo(data:any){
+    return this.http.post(`${environment.url}/user-management/signUpToApp`, data);
+  }
+
   sendMessage(to: string, message: string): Observable<any> {
     return this.http.post(`${environment.url}/events-management/messages`, { to, message });
   }

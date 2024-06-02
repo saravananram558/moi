@@ -14,7 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
     ButtonModule, InputTextModule
   ],
   exports: [
-    OverlayPanelModule,ButtonModule,InputTextModule, ReactiveFormsModule
+    OverlayPanelModule,ButtonModule,InputTextModule, ReactiveFormsModule,FormsModule
   ]
 })
 export class SharedModule { }
