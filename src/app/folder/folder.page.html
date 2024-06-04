@@ -1,26 +1,64 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title >{{ folder | titlecase}}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-    <ng-container *ngIf="folder === 'All Events'">
-      <app-home></app-home>
-    </ng-container>
-    <ng-container *ngIf="folder === 'dashboard'">
-      <app-dashboard></app-dashboard>
-    </ng-container>
-    <ng-container *ngIf="folder === 'masters'">
-      <app-masters></app-masters>
-    </ng-container>
-    <ng-container *ngIf="folder === 'trash'">
-      <app-trash></app-trash>
-    </ng-container>
-    <ng-container *ngIf="showEventPage">
-      <app-event></app-event>
-    </ng-container>
-</ion-content>
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+        <ion-list id="inbox-list">
+          <div class="sidebar-header">
+            <div class="user-name">
+              <div class="profile">
+                <ion-icon name="person-circle-outline" style="height: 40px;width: 40px;"></ion-icon>
+              </div>
+              <div class="name">
+                <ion-list-header>Sarvanan</ion-list-header>
+                <ion-note>hi&#64;saravanan.com</ion-note>
+              </div>
+            </div>
+            <div class="btn-wrap">
+              <ion-menu-toggle auto-hide="false">
+                <button class="btn" [routerLink]="['/register/login']"><ion-icon name="log-out-outline" style="height: 20px;width: 20px;"></ion-icon></button>
+              </ion-menu-toggle>
+            </div>
+          </div>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item routerDirection="root"
+                      [routerLink]="[p.url]"
+                      lines="none"
+                      detail="false"
+                      [class.selected]="isSelected(p.url)"
+                      routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content">
+      <ion-header [translucent]="true">
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title >{{ folder | titlecase}}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true">
+        <ng-container *ngIf="folder === 'All Events'">
+          <app-home></app-home>
+        </ng-container>
+        <ng-container *ngIf="folder === 'dashboard'">
+          <app-dashboard></app-dashboard>
+        </ng-container>
+        <ng-container *ngIf="folder === 'masters'">
+          <app-masters></app-masters>
+        </ng-container>
+        <ng-container *ngIf="folder === 'trash'">
+          <app-trash></app-trash>
+        </ng-container>
+        <ng-container *ngIf="showEventPage">
+          <app-event></app-event>
+        </ng-container>
+    </ion-content>
+    </ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

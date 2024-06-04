@@ -114,20 +114,3 @@ ion-item.selected {
   --color: #fff;
 }
 
-.sidebar-header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 65px;
-  .user-name{
-    display: flex;
-    align-items: center;
-    .profile{
-      display: flex;
-      align-items: center;    
-    }
-  }
-  .btn-wrap{
-    padding-bottom: 0;
-  }
-}
