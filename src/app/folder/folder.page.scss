@@ -67,6 +67,11 @@ ion-menu.md ion-note {
   background-color: #FFEDD8;
 }
 
+// ion-menu.md ion-list#inbox-list {
+//   background-color: #FFF455;
+//   // border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);
+// }
+
 ion-menu.md ion-list#inbox-list ion-list-header {
   font-size: 22px;
   font-weight: 600;
@@ -154,3 +159,4 @@ ion-note {
 ion-item.selected {
   --color: #fff;
 }
+
