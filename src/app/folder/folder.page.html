@@ -55,6 +55,9 @@
         <ng-container *ngIf="folder === 'trash'">
           <app-trash></app-trash>
         </ng-container>
+        <ng-container *ngIf="folder === 'settings'">
+          <app-setting></app-setting>
+        </ng-container>
         <ng-container *ngIf="showEventPage">
           <app-event></app-event>
         </ng-container>

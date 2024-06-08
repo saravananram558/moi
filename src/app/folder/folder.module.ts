@@ -13,6 +13,7 @@ import { MastersComponent } from './masters/masters.component';
 import { EventComponent } from './event/event.component';
 import { TrashComponent } from './trash/trash.component';
 import { SharedModule } from 'src/shared/shared.module';
+import { SettingComponent } from './setting/setting.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,6 +22,6 @@ import { SharedModule } from 'src/shared/shared.module';
     FolderPageRoutingModule,
     SharedModule
   ],
-  declarations: [FolderPage, DashboardComponent, HomeComponent, MastersComponent, EventComponent, TrashComponent]
+  declarations: [FolderPage, DashboardComponent, HomeComponent, MastersComponent, EventComponent, TrashComponent, SettingComponent]
 })
 export class FolderPageModule {}

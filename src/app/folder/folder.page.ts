@@ -13,6 +13,7 @@ export class FolderPage implements OnInit {
     { title: 'Dashboard', url: '/folder/dashboard', icon: 'stats-chart' },
     { title: 'Masters', url: '/folder/masters', icon: 'shield' },
     { title: 'Trash', url: '/folder/trash', icon: 'trash' },
+    { title: 'Settings', url: '/folder/settings', icon: 'settings' },
   ];
   public folder!: string;
   showEventPage: boolean = false;
